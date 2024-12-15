@@ -1,0 +1,228 @@
+#include <iostream>
+using namespace std;
+
+class Deque {
+private:
+    int *arr;        // Pointer to array representing the deque
+    int front;       // Index of the front element
+    int rear;        // Index of the rear element
+    int capacity;    // Maximum capacity of the deque
+    int size;        // Current size of the deque
+
+public:
+    // Constructor to initialize the deque with a fixed capacity
+    Deque(int cap) {
+        capacity = cap;
+        arr = new int[capacity];  // Dynamically allocate memory for the array
+        front = -1;
+        rear = -1;
+        size = 0;
+    }
+
+    // Function to check if the deque is empty
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    // Function to check if the deque is full
+    bool isFull() {
+        return size == capacity;
+    }
+
+    // Function to add an element to the front of the deque
+    void addFront(int value) {
+        if (isFull()) {
+            cout << "Deque is full. Cannot add to the front." << endl;
+            return;
+        }
+
+        if (front == -1) {  // Deque is empty
+            front = 0;
+            rear = 0;
+        } else {
+            // Move front to the previous position, wrapping around if necessary
+            front = (front - 1 + capacity) % capacity;
+        }
+
+        arr[front] = value;
+        size++;
+        cout << "Added " << value << " to the front." << endl;
+    }
+
+    // Function to add an element to the rear of the deque
+    void addRear(int value) {
+        if (isFull()) {
+            cout << "Deque is full. Cannot add to the rear." << endl;
+            return;
+        }
+
+        if (rear == -1) {  // Deque is empty
+            front = 0;
+            rear = 0;
+        } else {
+            // Move rear to the next position, wrapping around if necessary
+            rear = (rear + 1) % capacity;
+        }
+
+        arr[rear] = value;
+        size++;
+        cout << "Added " << value << " to the rear." << endl;
+    }
+
+    // Function to delete an element from the front of the deque
+    void deleteFront() {
+        if (isEmpty()) {
+            cout << "Deque is empty. Cannot delete from the front." << endl;
+            return;
+        }
+
+        cout << "Deleted " << arr[front] << " from the front." << endl;
+
+        if (front == rear) {  // Only one element was in the deque
+            front = rear = -1;
+        } else {
+            // Move front to the next position, wrapping around if necessary
+            front = (front + 1) % capacity;
+        }
+
+        size--;
+    }
+
+    // Function to delete an element from the rear of the deque
+    void deleteRear() {
+        if (isEmpty()) {
+            cout << "Deque is empty. Cannot delete from the rear." << endl;
+            return;
+        }
+
+        cout << "Deleted " << arr[rear] << " from the rear." << endl;
+
+        if (front == rear) {  // Only one element was in the deque
+            front = rear = -1;
+        } else {
+            // Move rear to the previous position, wrapping around if necessary
+            rear = (rear - 1 + capacity) % capacity;
+        }
+
+        size--;
+    }
+
+    // Function to display the current elements of the deque
+    void display() {
+        if (isEmpty()) {
+            cout << "Deque is empty." << endl;
+            return;
+        }
+
+        cout << "Deque elements: ";
+        int i = front;
+        while (i != rear) {
+            cout << arr[i] << " ";
+            i = (i + 1) % capacity;
+        }
+        cout << arr[rear] << endl;  // Display the rear element
+    }
+
+    // Destructor to free allocated memory
+    ~Deque() {
+        delete[] arr;  // Free the dynamically allocated memory
+    }
+};
+
+int main() {
+    int capacity;
+    cout << "Enter the capacity of the deque: ";
+    cin >> capacity;
+
+    Deque deque(capacity);  // Create a deque with the given capacity
+
+    int choice, value;
+
+    do {
+        cout << "\nDeque Operations Menu:" << endl;
+        cout << "1. Add Element to Front" << endl;
+        cout << "2. Add Element to Rear" << endl;
+        cout << "3. Delete Element from Front" << endl;
+        cout << "4. Delete Element from Rear" << endl;
+        cout << "5. Display Deque" << endl;
+        cout << "6. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to add to the front: ";
+                cin >> value;
+                deque.addFront(value);
+                break;
+
+            case 2:
+                cout << "Enter value to add to the rear: ";
+                cin >> value;
+                deque.addRear(value);
+                break;
+
+            case 3:
+                deque.deleteFront();
+                break;
+
+            case 4:
+                deque.deleteRear();
+                break;
+
+            case 5:
+                deque.display();
+                break;
+
+            case 6:
+                cout << "Exiting..." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Please try again." << endl;
+        }
+    } while (choice != 6);
+
+    return 0;
+}
+
+ouble-Ended Queue (Deque) Basic Operations:
+A Deque (Double-Ended Queue) is a linear data structure that allows elements to be added or removed from both ends: the front and the rear. This gives it more flexibility compared to a regular queue, where elements can only be added at the rear and removed from the front.
+
+Basic Operations:
+Add to Front: Insert an element at the front of the deque.
+Add to Rear: Insert an element at the rear of the deque.
+Delete from Front: Remove the element from the front of the deque.
+Delete from Rear: Remove the element from the rear of the deque.
+Check if Empty: Return whether the deque is empty.
+Check if Full: Return whether the deque is full.
+Display: Print all elements in the deque.
+
+Add to Front (addFront):
+Condition: Check if the deque is full (size == capacity).
+Algorithm:
+If the deque is empty (front == -1), set both front and rear to 0.
+Otherwise, move the front pointer to the previous index (front = (front - 1 + capacity) % capacity) to ensure circular behavior.
+Insert the element at arr[front] and increment the size.
+
+
+Add to Rear (addRear):
+Condition: Check if the deque is full (size == capacity).
+Algorithm:
+If the deque is empty (front == -1), set both front and rear to 0.
+Otherwise, move the rear pointer to the next index (rear = (rear + 1) % capacity) to ensure circular behavior.
+Insert the element at arr[rear] and increment the size.
+
+ Delete from Front (deleteFront):
+Condition: Check if the deque is empty (size == 0).
+Algorithm:
+If there's only one element in the deque (front == rear), set both front and rear to -1 (deque is now empty).
+Otherwise, move the front pointer to the next index (front = (front + 1) % capacity).
+Decrease the size.
+
+Delete from Rear (deleteRear):
+Condition: Check if the deque is empty (size == 0).
+Algorithm:
+If there's only one element in the deque (front == rear), set both front and rear to -1 (deque is now empty).
+Otherwise, move the rear pointer to the previous index (rear = (rear - 1 + capacity) % capacity).
+Decrease the size.

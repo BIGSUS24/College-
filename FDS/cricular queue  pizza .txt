@@ -1,0 +1,182 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class PizzaParlour {
+private:
+    string* orders;  // Array to hold orders
+    int front;       // Points to the front of the queue
+    int rear;        // Points to the rear of the queue
+    int capacity;    // Maximum number of orders
+    int size;        // Current size of the queue
+
+public:
+    // Constructor to initialize the pizza parlour with a maximum capacity for orders
+    PizzaParlour(int m) {
+        capacity = m;
+        orders = new string[capacity];
+        front = 0;
+        rear = 0;
+        size = 0;
+    }
+
+    // Function to check if the queue is empty
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    // Function to check if the queue is full
+    bool isFull() {
+        return size == capacity;
+    }
+
+    // Function to place an order (enqueue)
+    void placeOrder(string order) {
+        if (isFull()) {
+            // If the queue is full, overwrite the oldest order
+            cout << "Queue is full! Overwriting the oldest order..." << endl;
+            front = (front + 1) % capacity;  // Move front to the next position
+            orders[rear] = order;           // Place the new order at the rear
+            rear = (rear + 1) % capacity;   // Move rear to the next position
+        } else {
+            orders[rear] = order;           // Place the new order at the rear
+            rear = (rear + 1) % capacity;   // Move rear to the next position
+            size++;
+        }
+        cout << "Order placed: " << order << endl;
+    }
+
+    // Function to serve an order (dequeue)
+    void serveOrder() {
+        if (isEmpty()) {
+            cout << "No orders to serve!" << endl;
+            return;
+        }
+
+        cout << "Serving order: " << orders[front] << endl;
+        front = (front + 1) % capacity;  // Move front to the next order
+        size--;
+    }
+
+    // Function to display current orders
+    void displayOrders() {
+        if (isEmpty()) {
+            cout << "No orders in the queue!" << endl;
+            return;
+        }
+
+        cout << "Current orders in the queue: " << endl;
+        int i = front;
+        int count = 0;
+        while (count < size) {
+            cout << orders[i] << endl;
+            i = (i + 1) % capacity;
+            count++;
+        }
+    }
+
+    // Destructor to free memory
+    ~PizzaParlour() {
+        delete[] orders;
+    }
+};
+
+int main() {
+    int m;
+    cout << "Enter the maximum number of orders the pizza parlour can accept: ";
+    cin >> m;
+
+    PizzaParlour parlour(m);  // Create a pizza parlour with the given capacity
+
+    int choice;
+    string order;
+
+    do {
+        cout << "\nPizza Parlour Operations Menu:" << endl;
+        cout << "1. Place an Order" << endl;
+        cout << "2. Serve an Order" << endl;
+        cout << "3. Display Orders" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the order: ";
+                cin.ignore();  // To clear the newline character from the buffer
+                getline(cin, order);
+                parlour.placeOrder(order);
+                break;
+
+            case 2:
+                parlour.serveOrder();
+                break;
+
+            case 3:
+                parlour.displayOrders();
+                break;
+
+            case 4:
+                cout << "Exiting the system..." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Please try again." << endl;
+        }
+    } while (choice != 4);
+
+    return 0;
+
+}
+
+
+Circular Queue: Basic Concept
+A Circular Queue is a data structure that overcomes the limitation of a linear queue, which wastes space when elements are dequeued. It allows efficient use of space by connecting the front and rear ends, effectively "wrapping" around the array to reuse available positions.
+
+Problems with Linear Queue:
+Wasted Space:
+
+In a linear queue, when elements are dequeued, the space at the front of the array is unused, even though there may still be free space at the rear.
+Example: If elements are dequeued, the rear pointer doesn’t move to the empty positions at the front, thus leaving gaps.
+Overflow Condition:
+
+When the rear pointer reaches the end of the array, it cannot be used for new elements, even if there is space at the front of the array after dequeuing elements. This leads to a false overflow condition.
+Circular Queue Solution:
+In a circular queue, both the front and rear pointers can move circularly through the array. When the rear pointer reaches the end, it wraps around to the beginning of the array, utilizing any empty spaces left by dequeued elements.
+
+Basic Operations:
+Enqueue (Insert an Element):
+
+Add an element to the rear of the queue.
+If the queue is full, enqueue is not allowed.
+The rear pointer is updated after each insertion and wraps around when it reaches the end of the array.
+Dequeue (Remove an Element):
+
+Remove an element from the front of the queue.
+If the queue is empty, dequeue is not allowed.
+The front pointer is updated after each removal and wraps around when it reaches the end of the array.
+Full Condition:
+
+The queue is considered full if the next position after rear is the front:
+(rear + 1) % capacity == front
+Empty Condition:
+
+The queue is empty when the front equals rear:
+front == rear
+Algorithm for Insertion and Deletion:
+
+Insertion (Enqueue):
+Check if the queue is full:
+If (rear + 1) % capacity == front, the queue is full.
+Insert the element:
+Place the element at rear.
+Update the rear pointer:
+rear = (rear + 1) % capacity
+
+Deletion (Dequeue):
+Check if the queue is empty:
+If front == rear, the queue is empty.
+Remove the element:
+Retrieve the element at front.
+Update the front pointer:
+front = (front + 1) % capacity

@@ -1,0 +1,95 @@
+group1 = ["Aman", "Vedant", "Atharva", "Sarthak", "Saloni"] # Criket
+group2 = ["Aman", "Saloni", "Aditya", "Ayush", "Atharva"] # Badminton
+group3 = ["Raj", "Ruchi", "Vedant", "Atharva"] # Football
+
+# In cricket and Badminton
+
+print("Students who play Cricket and Badminton\n")
+
+resultcb = []
+for i in group1:
+    for j in group2:
+        if i==j:
+            resultcb.append(i)
+
+print(resultcb, end="\n\n")
+
+# In cricket and Football
+
+print("Students who play either Cricket or badminton but not both\n")
+
+resultcf = group1.copy()
+for j in group2:
+    if j in resultcf:
+        resultcf.remove(j)
+
+print(resultcf, end="\n\n")
+
+# Neither cricket nor badminton but Football
+
+print("Students who play Neither Cricket nor Badminton but Football\n")
+
+resultncnbf = group3.copy()
+for i in group1:
+    if i in resultncnbf:
+        resultncnbf.remove(i)
+
+for i in group2:
+    if i in resultncnbf:
+        resultncnbf.remove(i)
+
+print(resultncnbf, end="\n\n")
+
+# Cricket and football but not badminton
+
+print("Students who play Cricket and football but not badminton\n")
+
+
+resultncnbf = group1
+for i in group3:
+    resultncnbf.append(i)
+
+resultncnbf = list(set(resultncnbf))
+
+for i in group2:
+    if i in resultncnbf:
+        resultncnbf.remove(i)
+
+print(resultncnbf, end="\n\n")
+
+
+
+
+A list is a fundamental data structure used to store an ordered collection of elements. It is highly flexible, allowing elements of various data types, including numbers, strings, or other lists, to be stored within a single list. Lists are mutable, meaning their contents can be altered after creation. This allows you to add, remove, or modify elements at any point during the program's execution. They are indexed, meaning that each element in a list has a specific position, and you can access elements using their index, starting from 0. Lists can also store duplicate values, so you can have the same item more than once within a list. Because of these properties, lists are one of the most commonly used data structures for general-purpose programming.
+
+Operations on Lists:
+append():
+The append() operation is used to add a new element to the end of the list. It is a simple operation that increases the size of the list by one. This operation does not modify any other elements in the list and is generally efficient in terms of time complexity, as it appends the element directly without shifting other elements. For example, if you have a list of numbers [1, 2, 3], calling append(4) will change the list to [1, 2, 3, 4].
+
+copy():
+The copy() operation creates a shallow copy of the list. This means it creates a new list that contains the same elements as the original one. However, the new list is a separate object, so any changes made to the copied list will not affect the original list. It’s commonly used when you want to preserve the original list while making changes to the copy. For instance, copying [1, 2, 3] will result in a new list [1, 2, 3], and any modifications to the copied list won’t change the original.
+
+remove():
+The remove() operation is used to delete the first occurrence of a specified element in the list. If the element exists in the list, it is removed; if not, a ValueError is raised. It’s important to note that remove() only removes the first instance of the element it encounters. If you need to remove all instances of a value, you would need to use a loop or list comprehension. For example, if the list is [1, 2, 3, 4, 2] and you call remove(2), the result will be [1, 3, 4, 2].
+
+set():
+The set() operation is used to convert a list into a set, which automatically removes any duplicate values. A set is an unordered collection of unique elements, so any repeated items in the list are discarded when converting it into a set. This operation is useful when you need to eliminate duplicates from a list but are not concerned with maintaining the order of elements. For instance, converting the list [1, 2, 2, 3, 3] into a set would result in {1, 2, 3}, removing the duplicates.
+
+
+___________________________________________________________________
+
+
+1. Finding Students Who Play Both Cricket and Badminton
+This section identifies students who are common to both the Cricket and Badminton groups. The program compares each student in the Cricket group with every student in the Badminton group. If a match is found, the student's name is added to a result list. At the end of this process, the result contains all students who play both Cricket and Badminton.
+
+2. Finding Students Who Play Either Cricket or Badminton but Not Both
+Here, the program determines students who play either Cricket or Badminton but not both. It starts by making a copy of the Cricket group to avoid modifying the original list. Then, it checks each student in the Badminton group. If a student is found in both the Cricket copy and the Badminton group, they are removed from the Cricket copy. This leaves only students who play one of the two sports.
+
+3. Finding Students Who Play Football but Neither Cricket nor Badminton
+This part identifies students who play Football but not Cricket or Badminton. A copy of the Football group is created to keep the original list unchanged. The program then removes students from this Football list who are found in either the Cricket or Badminton groups. The final list contains students who exclusively play Football.
+
+4. Finding Students Who Play Cricket and Football but Not Badminton
+In this section, the program identifies students who play both Cricket and Football, excluding those who also play Badminton. It starts by combining the Cricket and Football groups into a single list. To ensure no duplicate entries, the combined list is converted into a unique set of names. Finally, students present in the Badminton group are removed from this combined list, resulting in a list of students who meet the criteria.
+
+Each part of the program is designed to analyze the relationships between the groups of students by filtering and comparing their participation in different sports. Through logical checks and data manipulations, the program identifies specific subsets of students based on the given conditions.
+

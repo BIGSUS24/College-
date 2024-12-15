@@ -1,0 +1,89 @@
+def bubbleSort(arr):
+  n=len(arr)
+  for i in range(n-1):
+    for j in range(0, n-i-1):
+      if arr[j]>arr[j+1]:
+        arr[j], arr[j+1]=arr[j+1], arr[j]
+
+arr=[]
+Num=int(input("Enter the number of students"))
+for i in range (Num):
+  per=float(input("Enter the percentage marks"))
+  arr.append(per)
+
+bubbleSort(arr)
+
+print("Sorted array is:")
+for i in range(len(arr)):
+  print("%f" %arr[i])
+
+Sorting is the process of arranging elements in a specific order, typically either ascending (smallest to largest) or descending (largest to smallest). The goal of sorting is to organize data to make it easier to search, compare, and manipulate. Common sorting operations include arranging numbers, words, or any data types based on a defined order.
+
+Bubble Sort Explanation
+Bubble Sort is a simple comparison-based sorting algorithm. It repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The largest unsorted element "bubbles" to the correct position with each pass through the list.
+
+bubble Sort Algorithm:
+Input: A list of elements to be sorted.
+Initialize: Start from the first element.
+Outer Loop: For each element (except the last), iterate through the list and compare adjacent elements.
+Inner Loop: If an element is greater than the next one, swap them.
+Repeat: Continue making passes through the list until no more swaps are needed.
+Output: Return the sorted list.
+
+
+
+What is Sorting?
+Sorting is the process of arranging elements in a specific order, either ascending or descending, to make data easier to search, compare, and manipulate.
+
+Bubble Sort Explanation
+Bubble Sort is a simple sorting algorithm that compares adjacent elements and swaps them if they are in the wrong order. The largest unsorted element "bubbles" to the correct position with each pass through the list, and this process repeats until the list is sorted.
+
+Time Complexity of Bubble Sort:
+Best Case: O(n) (if the list is already sorted).
+Average/Worst Case: O(n^2) (for unsorted or reverse-sorted lists).
+
+______________________________________________________________________________
+
+def selectionsort(arr1):
+
+    for i in range(len(arr1)):
+        min_idx = 1
+        for j in range(i+1, len(arr1)):
+            if arr1[min_idx] > arr1[j]:
+                min_idx = j
+
+
+    # swap the found minimum element with
+    # the first element
+        arr1[i], arr1[min_idx] = arr1[min_idx], arr1[i]
+
+arr1=[]
+num=int(input("enter the number of students "))
+for i in range (num):
+    per=float(input("enter the percentage marks "))
+    arr1.append(per)
+
+selectionsort(arr1)
+# driver code to test above
+print ("sorted array")
+for i in range(len(arr1)):
+    print("%f" %arr1[i])
+
+Time Complexity of Selection Sort:
+Selection Sort always performs O(n^2) comparisons, regardless of whether the list is already sorted or not. Here's the breakdown:
+
+Best Case: O(n^2) (since it always needs to search for the minimum element in each pass).
+Average Case: O(n^2) (same reason as the best case).
+Worst Case: O(n^2) (same reason as the best case).
+
+Selection Sort is another simple comparison-based sorting algorithm. It divides the list into two parts: the sorted part (initially empty) and the unsorted part. It repeatedly selects the smallest (or largest) element from the unsorted part and swaps it with the first element of the unsorted part. This continues until the list is completely sorted.
+
+Selection Sort Algorithm:
+Input: A list of elements to be sorted.
+Initialize: Start from the first element of the list.
+Outer Loop: Iterate through the list from the beginning to the second-to-last element.
+Find Minimum: For each position, find the smallest element in the remaining unsorted portion of the list.
+Swap: Swap the smallest element with the current element.
+Repeat: Continue this process for each subsequent element.
+Output: Return the sorted list.
+

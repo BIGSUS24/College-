@@ -1,0 +1,197 @@
+#include <iostream>
+using namespace std;
+
+// Define the Job structure that will represent each job in the queue
+struct Job {
+    int jobID;       // Job identifier
+    string jobName;  // Name or description of the job
+    Job* next;       // Pointer to the next job in the queue
+};
+
+// JobQueue class that simulates the job queue
+class JobQueue {
+private:
+    Job* front;  // Pointer to the front of the queue
+    Job* rear;   // Pointer to the rear of the queue
+
+public:
+    // Constructor to initialize an empty queue
+    JobQueue() {
+        front = nullptr;
+        rear = nullptr;
+    }
+
+    // Function to add a job to the queue (enqueue)
+    void addJob(int id, string name) {
+        Job* newJob = new Job();  // Create a new job
+        newJob->jobID = id;
+        newJob->jobName = name;
+        newJob->next = nullptr;
+
+        // If the queue is empty, set both front and rear to the new job
+        if (rear == nullptr) {
+            front = rear = newJob;
+            return;
+        }
+
+        // Otherwise, add the new job at the rear of the queue
+        rear->next = newJob;
+        rear = newJob;
+    }
+
+    // Function to remove a job from the queue (dequeue)
+    void deleteJob() {
+        // If the queue is empty, there's nothing to delete
+        if (front == nullptr) {
+            cout << "No jobs in the queue to delete." << endl;
+            return;
+        }
+
+        // Otherwise, remove the job from the front of the queue
+        Job* temp = front;
+        front = front->next;
+
+        cout << "Job ID: " << temp->jobID << " (" << temp->jobName << ") has been processed and removed from the queue." << endl;
+
+        // Delete the memory allocated for the removed job
+        delete temp;
+
+        // If the queue becomes empty, set rear to nullptr
+        if (front == nullptr) {
+            rear = nullptr;
+        }
+    }
+
+    // Function to display the jobs in the queue
+    void displayJobs() {
+        if (front == nullptr) {
+            cout << "The job queue is empty." << endl;
+            return;
+        }
+
+        Job* temp = front;
+        cout << "Current Job Queue: " << endl;
+        while (temp != nullptr) {
+            cout << "Job ID: " << temp->jobID << ", Job Name: " << temp->jobName << endl;
+            temp = temp->next;
+        }
+    }
+
+    // Destructor to clean up the memory
+    ~JobQueue() {
+        while (front != nullptr) {
+            deleteJob();  // Delete all jobs in the queue
+        }
+    }
+};
+
+// Main function to simulate the job queue
+int main() {
+    JobQueue jobQueue;  // Create an instance of the JobQueue class
+    int choice;
+    int jobID;
+    string jobName;
+
+    do {
+        cout << "\nJob Queue Simulation Menu:" << endl;
+        cout << "1. Add Job to Queue" << endl;
+        cout << "2. Delete Job from Queue" << endl;
+        cout << "3. Display Jobs in Queue" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                // Add a job to the queue
+                cout << "Enter Job ID: ";
+                cin >> jobID;
+                cout << "Enter Job Name: ";
+                cin.ignore();  // To clear the newline character left in the buffer
+                getline(cin, jobName);
+                jobQueue.addJob(jobID, jobName);
+                cout << "Job added to the queue." << endl;
+                break;
+
+            case 2:
+                // Delete a job from the queue
+                jobQueue.deleteJob();
+                break;
+
+            case 3:
+                // Display jobs in the queue
+                jobQueue.displayJobs();
+                break;
+
+            case 4:
+                cout << "Exiting the program." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Please try again." << endl;
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+
+
+Queue Data Structure
+A queue is a linear data structure that follows the FIFO (First In, First Out) principle. This means that elements are added at the rear (or tail) of the queue and removed from the front (or head). It’s like a line at a ticket counter—first person in line is the first one to be served.
+
+Basic Operations on a Queue
+The basic operations for a queue are:
+
+Enqueue (add an element):
+
+Adds an element to the rear (tail) of the queue.
+Dequeue (remove an element):
+
+Removes an element from the front (head) of the queue.
+Front/Peek:
+
+Returns the element at the front of the queue without removing it.
+IsEmpty:
+
+Checks whether the queue is empty or not.
+Size:
+
+Returns the number of elements currently in the queue.
+Queue Algorithm Overview
+Let’s break down how these operations work with the linked list-based queue from the code you posted:
+
+1. Enqueue (Adding a Job to the Queue)
+When a new job is added, we create a new Job node and add it to the rear of the queue. If the queue is empty, both the front and rear pointers point to the new job. If not, the new job is added after the rear and the rear pointer is updated to point to this new job.
+
+Algorithm for Enqueue:
+
+Create a new job node.
+If the queue is empty, set both front and rear to the new job.
+If the queue is not empty, add the new job to the end of the queue and update the rear pointer.
+2. Dequeue (Removing a Job from the Queue)
+When a job is processed, it is removed from the front of the queue. We update the front pointer to the next job in line. If the queue becomes empty after this operation, the rear pointer is also set to nullptr.
+
+Algorithm for Dequeue:
+
+If the queue is empty, return an error (nothing to remove).
+Otherwise, remove the job from the front of the queue.
+Update the front pointer to point to the next job.
+If the queue becomes empty, set rear to nullptr.
+
+isEmpty Algorithm
+The isEmpty function checks whether the queue has any elements. In a linked list-based queue, the queue is empty if the front pointer is nullptr.
+
+Algorithm for isEmpty:
+
+Step 1: Check if the front pointer is nullptr.
+Step 2: If front is nullptr, it means the queue is empty, so return true.
+Step 3: Otherwise, return false because there are elements in the queue.
+
+isFull Algorithm
+In a linked list-based queue, the queue is never truly "full" unless the system runs out of memory. Therefore, the isFull check does not apply in the same way as in a static array-based queue (where the maximum size is predefined). For a static array-based queue, we can check if the queue has reached its capacity.
+
+Algorithm for isFull in Array-based Queue: If you're implementing the queue with a fixed size (using an array), the queue is full when the number of elements in the queue equals the capacity.
+
+Step 1: Check if the number of elements in the queue equals the maximum size of the queue (capacity).
+Step 2: If the number of elements equals the capacity, return true (the queue is full).
+Step 3: Otherwise, return false (there’s space to add more elements).

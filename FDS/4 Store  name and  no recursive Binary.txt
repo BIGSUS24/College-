@@ -1,0 +1,83 @@
+def binary_search(list1, key):
+
+    start = 0
+    end = len(list1)
+    while start < end:
+        nid = (start + end)//2
+        if list1[nid] > key:
+            end = nid
+        elif list1[nid] < key:
+            start = nid + 1
+        else:
+            return nid
+    return -1
+
+dict1={}
+
+while True:
+    data=input("enter name and mobile number seperated by comma")
+    if 'exit' == data:
+        break
+    name,num=data.split(",")
+    num=int(num)
+    dict1[num]=name
+print(dict1)
+list1=dict1.keys()
+list1=list(list1)
+list1.sort()
+print(list1)
+
+key = int(input("the number to search for:"))
+
+index = binary_search(list1, key)
+if index < 0:
+    print("{} was not found.".format(key))
+else:
+    print("{} was found at index {}.".format(key, index))
+    print("details of number found")
+    print(dict1[key])
+
+
+Searching is the process of finding a particular element or value within a collection of data, such as a list, array, or database. The goal is to locate the desired item (or determine if it is not present) as efficiently as possible.
+
+Binary Search
+Binary Search is a fast, efficient search algorithm that works by repeatedly dividing the sorted collection into two halves. It eliminates half of the remaining elements in each step, drastically reducing the number of elements to check.
+
+Key Principles of Binary Search:
+Sorted Data: Binary search works only on sorted data, meaning the data must be arranged in either ascending or descending order.
+Divide and Conquer: Binary search works by dividing the search space into two halves, comparing the target value with the middle element, and determining which half to continue searching based on the comparison.
+The main advantage of binary search is that it works in O(log n) time complexity, where n is the number of elements. This makes it much faster than linear search, especially for large datasets.
+
+Recursive Binary Search
+In the recursive approach, the search function calls itself with updated start and end indices until the target element is found or the search space is exhausted.
+Base Case: If the start index is greater than or equal to the end index, the element is not present.
+Recursive Call: The search space is halved by adjusting either the start or end index based on comparisons.
+Steps:
+
+Find the middle element.
+If the middle element is equal to the target, return the index.
+If the target is less than the middle element, recursively search the left half.
+If the target is greater than the middle element, recursively search the right half.
+
+Non-Recursive (Iterative) Binary Search
+The iterative version of binary search uses a loop to repeatedly divide the search space in half without using function calls.
+Loop: A while or for loop is used to continually adjust the start and end indices based on comparisons, and the loop terminates when the target is found or when the search space is exhausted.
+Steps:
+
+Set the start and end indices of the search space.
+Enter a loop that continues while the start index is less than or equal to the end index.
+Find the middle element.
+If the middle element is equal to the target, return the index.
+Otherwise, adjust the start or end index based on the comparison with the middle element and repeat the process.
+
+ Binary Search Algorithm:
+
+Input: A sorted list and a target value.
+Initialize: Set two pointers: one at the beginning (low) and one at the end (high) of the list.
+Middle Element: Find the middle element of the list.
+Compare:
+If the middle element is the target, return its index.
+If the middle element is greater than the target, narrow the search to the left half.
+If the middle element is less than the target, narrow the search to the right half.
+Repeat: Continue halving the search range until the target is found or the range is empty.
+Output: Return the index of the target or indicate that it is not found.

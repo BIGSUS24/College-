@@ -1,0 +1,115 @@
+# Function to perform Insertion Sort on the array of percentages
+def insertion_sort(arr):
+    # Traverse through 1 to len(arr)
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        
+        # Move elements of arr[0..i-1], that are greater than key,
+        # to one position ahead of their current position
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        
+        # Place key after the element smaller than it
+        arr[j + 1] = key
+
+# Main function
+def main():
+    # Number of students
+    num_students = int(input("Enter the number of students: "))
+    
+    # Array to store percentage of each student
+    percentages = []
+    
+    # Input percentages of students
+    print("Enter the percentages of the students:")
+    for i in range(num_students):
+        percentage = float(input(f"Student {i+1} percentage: "))
+        percentages.append(percentage)
+    
+    # Sorting the array using Insertion Sort
+    insertion_sort(percentages)
+    
+    # Display the sorted array
+    print("\nSorted percentages (in ascending order):")
+    for i, percentage in enumerate(percentages, start=1):
+        print(f"Student {i}: {percentage:.2f}%")
+
+# Call the main function to execute the program
+if __name__ == "__main__":
+    main()
+
+Insertion Sort Explanation
+Insertion Sort is a sorting algorithm that builds the final sorted array one element at a time. It works by taking an element from the unsorted part of the list and placing it in the correct position in the sorted part. This is done by comparing the element with the items in the sorted section and shifting them until the correct position is found.
+
+Time Complexity of Insertion Sort:
+Best Case: O(n) (when the list is already sorted).
+Average/Worst Case: O(n^2) (for unsorted or reverse-sorted lists).
+Insertion Sort Algorithm:
+Start with the second element, assuming the first element is already sorted.
+Compare the element with the ones in the sorted part of the list and shift them if necessary.
+Insert the element in its correct position.
+Repeat until the entire list is sorted.
+
+
+---------------------------------------------------------------------------------
+# Function to perform Shell Sort on the array of percentages
+def shell_sort(arr):
+    n = len(arr)
+    gap = n // 2  # Initial gap size
+
+    # Keep reducing the gap size until it becomes 0
+    while gap > 0:
+        # Perform a gapped insertion sort for this gap size
+        for i in range(gap, n):
+            temp = arr[i]
+            j = i
+            while j >= gap and arr[j - gap] > temp:
+                arr[j] = arr[j - gap]
+                j -= gap
+            arr[j] = temp
+
+        gap //= 2  # Reduce the gap size
+
+# Main function
+def main():
+    # Number of students
+    num_students = int(input("Enter the number of students: "))
+    
+    # Array to store percentage of each student
+    percentages = []
+    
+    # Input percentages of students
+    print("Enter the percentages of the students:")
+    for i in range(num_students):
+        percentage = float(input(f"Student {i + 1} percentage: "))
+        percentages.append(percentage)
+    
+    # Sorting the array using Shell Sort
+    shell_sort(percentages)
+    
+    # Display the top 5 scores (or fewer if there are less than 5 students)
+    print("\nTop 5 scores (in descending order):")
+    top_five = percentages[-5:][::-1]  # Take last 5 elements and reverse them to get descending order
+    for i, score in enumerate(top_five, start=1):
+        print(f"Top {i}: {score:.2f}%")
+
+# Call the main function to execute the program
+if __name__ == "__main__":
+    main()
+
+
+
+Shell Sort Explanation
+Shell Sort is an improvement over insertion sort. It works by sorting pairs of elements far apart from each other, then progressively reducing the gap between elements to be compared. The idea is to move elements closer to their correct position in a series of passes with different gap sizes. This reduces the number of comparisons and shifts, making it more efficient than standard insertion sort.
+
+Time Complexity of Shell Sort:
+Best Case: O(n log n) (when the gap sequence is well-chosen).
+Average/Worst Case: O(n^2) (with certain gap sequences). The time complexity depends on the gap sequence used, which can make it more efficient than insertion sort in practice.
+Shell Sort Algorithm:
+Start with a large gap between elements, typically half the length of the array.
+Perform a gapped insertion sort for the current gap.
+Reduce the gap size (usually halving it).
+Repeat the process until the gap size becomes zero, completing the sorting process.
+Shell Sort provides a good balance between efficiency and simplicity. It is more efficient than simpler algorithms like insertion sort, especially when dealing with larger datasets. However, its time complexity can vary based on the gap sequence used.

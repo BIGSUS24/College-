@@ -1,0 +1,364 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+struct SLLNode* createSLL(int cnt, struct SLLNode *head);
+void displaySLL(struct SLLNode *head);
+void A_U_B();
+void A_int_B();
+void A_Min_B();
+void B_Min_A();
+void U_Min_A_U_B();
+
+struct SLLNode
+{
+string data;
+struct SLLNode *next;
+}*headU, *headA, *headB;
+int main()
+{
+int i;
+headU = headA = headB = NULL;
+for(i=1; i<=3; i++)
+{
+if(i == 1)
+{
+cout<<"\n\n\t Enter 10 Students of SE Comp : ";
+headU = createSLL(10, headU);
+cout<<"\n";
+displaySLL(headU);
+}
+if(i == 2)
+{
+cout<<"\n\n\t Enter 5 Students who like Vanilla Icecreme: ";
+headA = createSLL(5, headA);
+cout<<"\n";
+displaySLL(headA);
+}
+
+if(i == 3)
+{
+cout<<"\n\n\t Enter 5 Students who like Butterscotch Icecreme: ";
+headB = createSLL(5, headB);
+cout<<"\n";
+displaySLL(headB);
+}
+}
+cout<<"\n\n Input Sets:------------------------";
+cout<<"\n\n Set 'U': ";
+displaySLL(headU);
+cout<<"\n\n Set 'A': ";
+displaySLL(headA);
+cout<<"\n\n Set 'B': ";
+displaySLL(headB);
+cout<<"\n\n Output Sets:------------------------";
+A_U_B();
+A_int_B();
+A_Min_B();
+B_Min_A();
+U_Min_A_U_B();
+
+cout<<"\n\n";
+return 0;
+}
+//.........................................................Function to create List as Sets.
+
+struct SLLNode* createSLL(int cnt, struct SLLNode *head)
+{
+int i;
+struct SLLNode *p, *newNode;
+for(i=0; i<cnt; i++)
+{
+newNode = new(struct SLLNode); // 1. DMA
+
+cout<<"\n\t Enter name of the student: "; // 2. Data & Address Assignment
+cin>>newNode->data;
+newNode->next = NULL;
+if(head == NULL) // 3. Add node in the list
+{
+head = newNode;
+p = head;
+}
+else
+{
+p->next = newNode;
+p = p->next;
+}
+}
+return head;
+}
+//...............................................Function to display Linked Lists as Sets.
+void displaySLL(struct SLLNode *head)
+{
+struct SLLNode *p;
+p = head;
+while(p != NULL)
+{
+cout<<" "<<p->data;
+p = p->next;
+}
+}
+//................................................Function for Set A U B .
+void A_U_B()
+{
+int i,j;
+string a[10];
+struct SLLNode *p, *q;
+i = 0; //Index of Resultant Array
+p = headA; //pointer to Set 'A'
+q = headB; //pointer to Set 'B'
+while(p != NULL && q != NULL)
+{
+
+if(p->data == q->data)
+{
+a[i] = p->data;
+i++;
+p = p->next;
+q = q->next;
+}
+else
+{
+a[i] = p->data;
+i++;
+p = p->next;
+}
+}
+if(p == NULL) //Set 'A' copied completely
+{
+while(q != NULL) //Copy remaining elements of Set 'B'
+{
+a[i] = q->data;
+i++;
+q = q->next;
+}
+}
+if(q == NULL) //Set 'B' copied completely
+{
+while(p != NULL) //Copy remaining elements of Set 'A'
+{
+a[i] = p->data;
+i++;
+p = p->next;
+}
+}
+cout<<"\n\n\t Set A U B: ";
+for(j=0; j < i; j++)
+cout<<" "<<a[j];
+}
+//................................................Function for Set A ^ B .
+void A_int_B()
+{
+int i,j;
+
+string a[10];
+struct SLLNode *p, *q;
+i = 0; //Index of Resultant Array
+p = headA; //pointer to Set 'A'
+while(p != NULL)
+{
+q = headB; //pointer to Set 'B'
+while(q != NULL)
+{
+if(p->data == q->data)
+{
+a[i] = p->data;
+i++;
+}
+q = q->next;
+}
+p = p->next;
+}
+cout<<"\n\n\t Set A ^ B: ";
+for(j=0; j < i; j++)
+cout<<" "<<a[j];
+}
+//................................................Function for Set A - B .
+void A_Min_B()
+{
+int i,j,flag;
+string a[10];
+struct SLLNode *p, *q;
+i = 0; //Index of Resultant Array
+p = headA; //pointer to Set 'A'
+while(p != NULL)
+{
+flag = 0;
+q = headB; //pointer to Set 'B'
+while(q != NULL)
+{
+if(p->data == q->data)
+
+{
+flag = 1;
+}
+q = q->next;
+}
+if(flag == 0)
+{
+a[i] = p->data;
+i++;
+}
+p = p->next;
+}
+cout<<"\n\n\t Set A - B: ";
+for(j=0; j < i; j++)
+cout<<" "<<a[j];
+}
+
+//................................................Function for Set B - A.
+void B_Min_A()
+{
+int i,j,flag;
+string a[10];
+struct SLLNode *p, *q;
+i = 0; //Index of Resultant Array
+q = headB; //pointer to Set 'B'
+while(q != NULL)
+{
+flag = 0;
+p = headA; //pointer to Set 'A'
+while(p != NULL)
+{
+if(q->data == p->data)
+{
+flag = 1;
+}
+p = p->next;
+}
+if(flag == 0)
+
+{
+a[i] = q->data;
+i++;
+}
+q = q->next;
+}
+cout<<"\n\n\t Set B - A: ";
+for(j=0; j < i; j++)
+cout<<" "<<a[j];
+}
+
+//................................................Function for Set U - (A U B).
+void U_Min_A_U_B()
+{
+int i,j,flag;
+string a[10];
+struct SLLNode *p, *q, *r;
+i = 0; //Index of Resultant Array
+p = headU; //pointer to Set 'U'
+while(p != NULL)
+{
+flag = 0;
+q = headA; //pointer to Set 'A'
+r = headB; //pointer to Set 'B'
+while(q != NULL)
+{
+if(p->data == q->data)
+{
+flag = 1;
+}
+q = q->next;
+}
+while(r != NULL)
+{
+if(p->data == r->data)
+{
+flag = 1;
+}
+r = r->next;
+
+}
+if(flag == 0)
+{
+a[i] = p->data;
+i++;
+}
+p = p->next;
+}
+cout<<"\n\n\t Set U - (A U B): ";
+for(j=0; j < i; j++)
+cout<<" "<<a[j];
+}
+
+A linked list is a linear data structure where elements (called nodes) are stored in memory. Each node contains two parts:
+
+Data: The actual data stored in the node.
+Next: A reference (or pointer) to the next node in the sequence.
+In a linked list, nodes are not stored in contiguous memory locations like arrays. Instead, each node points to the next one, forming a chain. This allows for dynamic memory allocation and flexibility in resizing the list.
+
+Terminology:
+Node: The basic unit of a linked list. It contains two parts:
+
+Data: Stores the actual information.
+Next: A pointer that refers to the next node in the list.
+Head: The first node in the linked list. If the list is empty, the head is NULL.
+
+Tail: The last node in the list. Its next pointer is NULL.
+
+Pointer: A variable that stores the address of a node.
+
+Linked List: A collection of nodes connected by pointers.
+
+Traversal: The process of visiting each node in the list, starting from the head.
+
+NULL: A special value that indicates the end of the list or the absence of a value.
+
+Basic Operations:
+Insertion:
+
+At the beginning: Insert a new node before the head.
+At the end: Insert a new node after the tail.
+At a specific position: Insert a new node at a given position in the list.
+Deletion:
+
+From the beginning: Remove the head node.
+From the end: Remove the last node.
+From a specific position: Remove a node from a specific position.
+Traversal: Visit each node and perform an operation (e.g., print data).
+
+Search: Look for a node with a specific value in the list.
+
+Update: Modify the data of a node at a given position.
+
+Algorithm for Basic Operations:
+Insertion at the beginning:
+
+Create a new node.
+Set its next pointer to the current head.
+Set the head to point to this new node.
+Insertion at the end:
+
+Create a new node.
+Traverse the list to find the last node.
+Set the next pointer of the last node to the new node.
+Traversal:
+
+Start from the head and follow the next pointers until you reach NULL.
+Perform any operation on the data in each node.
+Deletion from the beginning:
+
+Set the head to the next node of the current head.
+Deletion from the end:
+
+Traverse the list to find the second last node.
+Set its next pointer to NULL.
+Deletion from a specific position:
+
+Traverse the list to find the node before the one to be deleted.
+Set its next pointer to skip the node to be deleted.
+Searching:
+
+Traverse the list and compare each node's data with the target value.
+If found, return the node; otherwise, return NULL.
+Example:
+Insertion at the Beginning
+Let's insert a node with data 5 at the beginning of the list:
+
+Create a new node with data 5.
+Set the next pointer of the new node to the current head.
+Set the head to the new node.
+Traversal
+To traverse and print all the data in the linked list:
+
+Start at the head node.
+Follow the next pointers and print each node's data until you reach the last node (where next is NULL).

@@ -1,0 +1,187 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+// Node structure for doubly linked list
+struct Node {
+    int bit;       // To store the binary digit (0 or 1)
+    Node* next;    // Pointer to the next node
+    Node* prev;    // Pointer to the previous node
+};
+
+// Function to create a new node with given bit value
+Node* createNode(int bit) {
+    Node* newNode = new Node;
+    newNode->bit = bit;
+    newNode->next = nullptr;
+    newNode->prev = nullptr;
+    return newNode;
+}
+
+// Function to input binary number and store it in a doubly linked list
+Node* inputBinaryNumber() {
+    string binary;
+    cout << "Enter a binary number: ";
+    cin >> binary;
+
+    Node* head = nullptr;
+    Node* tail = nullptr;
+
+    for (char c : binary) {
+        int bit = c - '0';  // Convert char to integer (0 or 1)
+        Node* newNode = createNode(bit);
+
+        if (!head) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+    }
+
+    return head;
+}
+
+// Function to print the binary number stored in the doubly linked list
+void printBinaryNumber(Node* head) {
+    Node* temp = head;
+    while (temp) {
+        cout << temp->bit;
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Function to compute the 1's complement of the binary number
+Node* computeOnesComplement(Node* head) {
+    Node* temp = head;
+    while (temp) {
+        temp->bit = (temp->bit == 0) ? 1 : 0;  // Flip the bits
+        temp = temp->next;
+    }
+    return head;
+}
+
+// Function to compute the 2's complement of the binary number
+Node* computeTwosComplement(Node* head) {
+    // Compute 1's complement first
+    head = computeOnesComplement(head);
+
+    // Add 1 to the least significant bit
+    Node* temp = head;
+    while (temp) {
+        if (temp->bit == 0) {
+            temp->bit = 1;  // Set the first 0 to 1
+            return head;
+        } else {
+            temp->bit = 0;  // Set 1 to 0
+        }
+        temp = temp->next;
+    }
+    return head;  // If the number was all 1's, now it becomes 0 with an additional 1 at the end
+}
+
+// Main function to test the program
+int main() {
+    // Input binary number
+    Node* binaryNumber = inputBinaryNumber();
+
+    // Display the original binary number
+    cout << "Original Binary Number: ";
+    printBinaryNumber(binaryNumber);
+
+    // Compute and display the 1's complement
+    Node* onesComplement = computeOnesComplement(binaryNumber);
+    cout << "1's Complement: ";
+    printBinaryNumber(onesComplement);
+
+    // Compute and display the 2's complement
+    Node* twosComplement = computeTwosComplement(binaryNumber);
+    cout << "2's Complement: ";
+    printBinaryNumber(twosComplement);
+
+    return 0;
+}
+Doubly Linked List (DLL)
+A Doubly Linked List (DLL) is a type of linked list where each node contains three components:
+
+Data: The actual data stored in the node.
+Next: A pointer/reference to the next node in the list.
+Previous: A pointer/reference to the previous node in the list.
+This allows traversal in both directions—forward (from the head to the tail) and backward (from the tail to the head), unlike a singly linked list where traversal is only possible in one direction.
+
+Advantages of Doubly Linked List:
+Bidirectional Traversal: You can traverse in both forward and backward directions, which makes it more flexible compared to singly linked lists.
+Efficient Deletion: Deleting a node can be more efficient because you have access to the previous node (without needing to traverse the list from the start).
+
+Algorithm for Insertion at the Beginning of a Doubly Linked List:
+Inserting a node at the beginning of a doubly linked list involves the following steps:
+
+Create a new node and allocate memory for it.
+Set the data for the new node.
+Make the new node's next pointer point to the current head of the list.
+If the list is not empty, make the previous pointer of the current head point to the new node.
+Make the head pointer of the list point to the new node.
+
+Algorithm for Insertion at the End of a Doubly Linked List:
+Inserting a node at the end of a doubly linked list involves the following steps:
+
+Create a new node and allocate memory for it.
+Set the data for the new node.
+Traverse the list to find the last node.
+Make the last node's next pointer point to the new node.
+Set the previous pointer of the new node to the last node.
+
+void insertAtBeginning(Node** head, int data) {
+    Node* newNode = new Node();  // Step 1: Create a new node
+    newNode->data = data;        // Step 2: Set data
+    
+    newNode->next = *head;       // Step 3: Point next to current head
+    
+    if (*head != nullptr) {
+        (*head)->prev = newNode; // Step 4: Set previous pointer of current head
+    }
+    
+    *head = newNode;             // Step 5: Update head to point to new node
+}
+
+
+void insertAtEnd(Node** head, int data) {
+    Node* newNode = new Node();  // Step 1: Create a new node
+    newNode->data = data;        // Step 2: Set data
+    newNode->next = nullptr;     // Step 3: Next of new node is null (it's the last node)
+    
+    if (*head == nullptr) {
+        *head = newNode;         // If list is empty, new node becomes the head
+        newNode->prev = nullptr; // No previous node
+        return;
+    }
+    
+    Node* temp = *head;
+    while (temp->next != nullptr) { // Step 4: Traverse to the last node
+        temp = temp->next;
+    }
+    
+    temp->next = newNode;       // Step 5: Set last node's next to the new node
+    newNode->prev = temp;       // Step 6: Set new node's prev to the last node
+}
+
+Insertion
+At the beginning: Adds a new node at the start of the list.
+At the end: Adds a new node at the end of the list.
+At a specific position: Inserts a new node at a specific position in the list.
+2. Deletion
+From the beginning: Removes the first node from the list.
+From the end: Removes the last node from the list.
+At a specific position: Removes the node at a specific position in the list.
+3. Traversal
+Forward traversal: Traverse the list from head to tail, visiting each node.
+Backward traversal: Traverse the list from tail to head, visiting each node.
+4. Search
+Search for an element: Find whether a node with a specific data value exists in the list.
+5. Update
+Update a node's data: Modify the data stored in a specific node.
+
+

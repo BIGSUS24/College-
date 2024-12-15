@@ -1,0 +1,61 @@
+def process_transactions(transactions):
+    balance = 0
+    for transaction in transactions:
+        action = transaction[0]
+        amount = int(transaction[1:])
+
+        if action == 'D':
+            balance += amount
+        elif action == 'W':
+            if balance - amount >= 0:
+                balance -= amount
+            else:
+                print(f"Cannot withdraw {amount} as it would make the balance negative.")
+        else:
+            print(f"Invalid transaction type: {action}")
+
+    return balance
+
+
+# Input transactions
+transactions = ["D300", "D300", "W200", "D100"]
+
+# Process transactions and print the resulting balance
+final_balance = process_transactions(transactions)
+print(f"Final balance: {final_balance}")
+
+
+
+
+A string in Python is an ordered sequence of characters, and it is immutable, meaning you cannot modify individual characters of a string after it has been created. However, you can create new strings by slicing or combining them. Strings are perfect for this use case because each transaction is a combination of an action (deposit or withdrawal) and an amount, which can easily be processed using string operations.
+
+String Operations
+Indexing:
+Indexing is used to access specific characters in the string. In this case, the first character of each string (transaction[0]) represents the action type (either 'D' for deposit or 'W' for withdrawal). Python strings are zero-indexed, meaning that the first character is at position 0. By using indexing, you can access and interpret different parts of the string.
+
+Slicing:
+Slicing allows you to extract a substring from a string by specifying a range of indices. In this code, slicing is used to extract the amount from the transaction string. The slicing operation is performed on the string starting from index 1 onward, removing the first character (which is the action type) and extracting the remaining part of the string, which represents the amount. The int() function is then used to convert this substring into an integer.
+
+String Conversion:
+Although this isn't a typical "string operation," the conversion from a substring (which is a string) to an integer is crucial here. The amount, after being sliced from the transaction string, is converted from a string format to an integer using int(). This allows the program to perform numerical operations like addition and subtraction on the amount, which is necessary for calculating the balance.
+
+Concatenation (implicit):
+Although not explicitly shown in the code, string concatenation often occurs implicitly when combining strings with printed messages. When printing out an error message in case of an invalid transaction, strings are combined automatically to form the final message.
+
+
+
+
+
+___________________________________________________________
+
+1. Processing the Transactions
+This function processes a list of transactions, adjusting a balance based on whether the transaction is a deposit or a withdrawal. The program starts by initializing the balance to zero. For each transaction, the type of transaction (Deposit or Withdrawal) is identified, and the associated amount is extracted. If the transaction is a deposit, the amount is added to the balance. If it’s a withdrawal, the program checks if the balance is sufficient to cover the withdrawal. If the withdrawal would result in a negative balance, an error message is printed. If the transaction type is invalid, an error message is displayed as well.
+
+2. Handling Deposits and Withdrawals
+The program handles deposits by simply adding the specified amount to the balance when a transaction begins with 'D'. For withdrawals, it checks whether the balance is enough to cover the withdrawal by comparing the current balance minus the withdrawal amount with zero. If there’s enough money, the withdrawal is processed, and the balance is updated. If the balance would go negative, the withdrawal is denied, and a message is printed indicating that the withdrawal cannot be processed.
+
+3. Invalid Transaction Handling
+If the transaction type is neither a deposit ('D') nor a withdrawal ('W'), the program identifies it as an invalid transaction and prints an error message. This ensures that only valid transactions are processed, and any other transaction types are flagged as incorrect.
+
+4. Final Output
+Once all transactions have been processed, the program returns the final balance. The balance is printed at the end to display the result of all the transactions. This allows users to track how deposits and withdrawals affect the overall balance.

@@ -1,0 +1,122 @@
+#include <iostream>
+#include <stack>
+#include <cctype>
+#include <cmath>
+#include <string>
+
+using namespace std;
+
+// Function to check precedence of operators
+int precedence(char op) {
+    if (op == '+' || op == '-') return 1;  // Addition and Subtraction
+    if (op == '*' || op == '/') return 2;  // Multiplication and Division
+    return 0;
+}
+
+// Function to apply the operator on two operands
+int applyOperator(int a, int b, char op) {
+    switch (op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return a / b;
+        default: return 0;
+    }
+}
+
+// Function to convert infix expression to postfix
+string infixToPostfix(const string& infix) {
+    stack<char> operators;
+    string postfix = "";
+    int i = 0;
+    while (i < infix.length()) {
+        char ch = infix[i];
+        
+        if (isdigit(ch)) {
+            // If it's a digit, handle multi-digit numbers
+            string num = "";
+            while (i < infix.length() && isdigit(infix[i])) {
+                num += infix[i];
+                i++;
+            }
+            postfix += num + " "; // Add the number to the postfix expression
+        }
+        else if (ch == '(') {
+            // If it's an opening parenthesis, push it to the stack
+            operators.push(ch);
+            i++;
+        }
+        else if (ch == ')') {
+            // If it's a closing parenthesis, pop operators from the stack until an opening parenthesis is found
+            while (!operators.empty() && operators.top() != '(') {
+                postfix += operators.top();
+                operators.pop();
+            }
+            operators.pop();  // Pop the '('
+            i++;
+        }
+        else {
+            // If it's an operator, pop operators with higher or equal precedence and push the current operator
+            while (!operators.empty() && precedence(operators.top()) >= precedence(ch)) {
+                postfix += operators.top();
+                operators.pop();
+            }
+            operators.push(ch);
+            i++;
+        }
+    }
+
+    // Pop all remaining operators from the stack
+    while (!operators.empty()) {
+        postfix += operators.top();
+        operators.pop();
+    }
+
+    return postfix;
+}
+
+// Function to evaluate a postfix expression
+int evaluatePostfix(const string& postfix) {
+    stack<int> operandStack;
+    int i = 0;
+    while (i < postfix.length()) {
+        if (isdigit(postfix[i])) {
+            // If the character is a digit, extract the full number
+            string num = "";
+            while (i < postfix.length() && isdigit(postfix[i])) {
+                num += postfix[i];
+                i++;
+            }
+            operandStack.push(stoi(num));  // Push the integer value of the number
+        }
+        else if (postfix[i] != ' ') {
+            // If it's an operator, pop two operands and apply the operator
+            int b = operandStack.top(); operandStack.pop();
+            int a = operandStack.top(); operandStack.pop();
+
+            int result = applyOperator(a, b, postfix[i]);
+            operandStack.push(result);
+        }
+        i++;
+    }
+
+    return operandStack.top();  // The final result will be the only value left in the stack
+}
+
+int main() {
+    string infixExpression;
+
+    // Input the infix expression
+    cout << "Enter the infix expression: ";
+    getline(cin, infixExpression);
+
+    // Convert the infix expression to postfix
+    string postfixExpression = infixToPostfix(infixExpression);
+    cout << "Postfix expression: " << postfixExpression << endl;
+
+    // Evaluate the postfix expression
+    int result = evaluatePostfix(postfixExpression);
+    cout << "Result of postfix evaluation: " << result << endl;
+
+    return 0;
+}

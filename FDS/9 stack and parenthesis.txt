@@ -1,0 +1,154 @@
+#include <iostream>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+// Function to check if the given expression is well-parenthesized
+bool isBalanced(const string& expression) {
+    // Stack to store opening parentheses
+    stack<char> s;
+
+    // Map to match the closing parentheses with their corresponding opening parentheses
+    unordered_map<char, char> matchingParentheses = {
+        {')', '('}, 
+        {'}', '{'}, 
+        {']', '['}
+    };
+
+    // Traverse each character in the expression
+    for (char ch : expression) {
+        // If the character is an opening parenthesis, push it onto the stack
+        if (ch == '(' || ch == '{' || ch == '[') {
+            s.push(ch);
+        }
+        // If the character is a closing parenthesis
+        else if (ch == ')' || ch == '}' || ch == ']') {
+            // Check if the stack is empty (no matching opening parenthesis)
+            if (s.empty()) {
+                return false;
+            }
+
+            // Pop the top element from the stack and check if it matches the corresponding opening parenthesis
+            char top = s.top();
+            s.pop();
+            
+            // If the popped character doesn't match the corresponding opening parenthesis, return false
+            if (top != matchingParentheses[ch]) {
+                return false;
+            }
+        }
+    }
+
+    // If the stack is empty, the expression is balanced
+    return s.empty();
+}
+
+// Main function to test the program
+int main() {
+    string expression;
+
+    // Input the expression
+    cout << "Enter the expression: ";
+    cin >> expression;
+
+    // Check if the expression is well-parenthesized
+    if (isBalanced(expression)) {
+        cout << "The expression is well-parenthesized." << endl;
+    } else {
+        cout << "The expression is not well-parenthesized." << endl;
+    }
+
+    return 0;
+}
+
+
+A stack is a linear data structure that follows the Last In, First Out (LIFO) principle. This means that the last element added to the stack is the first one to be removed. It's like a stack of plates: the plate placed on top is the first one to be taken off.
+
+In a stack, elements are inserted and removed from one end, which is called the top of the stack. The stack is commonly used in many applications like expression evaluation, backtracking, function calls in recursion, and more.
+
+Basic Operations of a Stack
+Push Operation:
+
+Adds an element to the top of the stack.
+If there is space (in case of a bounded stack), the element is added to the stack, and the stack size increases.
+Pop Operation:
+
+Removes the top element from the stack and returns it.
+If the stack is empty, this operation may throw an error or return a special value.
+Peek (Top) Operation:
+
+Returns the top element of the stack without removing it.
+If the stack is empty, it might return null or indicate that there is no element.
+IsEmpty Operation:
+
+Checks whether the stack is empty or not.
+If the stack has no elements, it returns true; otherwise, it returns false.
+Size Operation:
+
+Returns the current size of the stack, i.e., how many elements are present in the stack.
+Stack Algorithms for Basic Operations
+1. Push Operation:
+The push operation adds an element to the top of the stack. Here's how it works:
+
+Step 1: Check if the stack has space if it's bounded (e.g., array-based implementation).
+Step 2: Place the element at the current top position of the stack.
+Step 3: Move the "top" pointer to the next position (increment or adjust the index).
+Step 4: If required, increase the size of the stack by 1.
+For example, if we are adding an element X to the stack, and the stack is currently [A, B, C], after the push operation, the stack will become [A, B, C, X].
+
+2. Pop Operation:
+The pop operation removes the top element from the stack:
+
+Step 1: Check if the stack is empty. If it is, return an error or a special value.
+Step 2: Retrieve and remove the element at the top of the stack.
+Step 3: Move the "top" pointer to the previous position (decrease the index).
+Step 4: Decrease the size of the stack by 1.
+For example, if the stack is [A, B, C] and we perform a pop operation, C will be removed, and the stack will become [A, B]. The popped element C will be returned.
+
+3. Peek (Top) Operation:
+The peek operation allows us to view the top element without removing it:
+
+Step 1: Check if the stack is empty. If it is, return null or indicate that there is no element.
+Step 2: Return the element at the top of the stack.
+For example, if the stack is [A, B, C], the peek operation will return C without removing it. The stack will still be [A, B, C].
+
+4. IsEmpty Operation:
+The isEmpty operation checks whether the stack has any elements:
+
+Step 1: Check if the stack has zero elements.
+Step 2: If it does, return true; otherwise, return false.
+For example, if the stack is [A, B, C], the isEmpty() operation will return false because there are elements. If the stack is [], it will return true.
+
+5. Size Operation:
+The size operation gives the number of elements currently in the stack:
+
+Step 1: Return the number of elements in the stack. This can be tracked by the "size" variable or calculated based on the index of the top pointer.
+For example, if the stack is [A, B, C], the size operation will return 3 because there are three elements in the stack.
+
+General Algorithm for Stack Operations
+The general algorithm for stack operations is straightforward, as each operation manipulates the stack in one direction (either pushing or popping from the top). Here's a summary:
+
+Push:
+
+Check if the stack is full (for a bounded stack).
+Add the new element to the top of the stack.
+Update the "top" pointer or index to reflect the new top.
+Optionally, increase the size of the stack.
+Pop:
+
+Check if the stack is empty.
+If it's not empty, remove and return the top element.
+Update the "top" pointer to reflect the new top after the element is removed.
+Optionally, decrease the size of the stack.
+Peek:
+
+Check if the stack is empty.
+If it's not empty, return the element at the top of the stack without removing it.
+IsEmpty:
+
+Check if the stack is empty (size is zero or top pointer is -1).
+Return true if empty, otherwise return false.
+Size:
+
+Return the size of the stack (either stored in a size variable or calculated based on the top pointer).

@@ -1,0 +1,110 @@
+#include <iostream>
+using namespace std;
+
+// Node structure for doubly linked list
+struct Node {
+    int bit;       // To store the binary digit (0 or 1)
+    Node* next;    // Pointer to the next node
+    Node* prev;    // Pointer to the previous node
+};
+
+// Function to create a new node with given bit value
+Node* createNode(int bit) {
+    Node* newNode = new Node;
+    newNode->bit = bit;
+    newNode->next = nullptr;
+    newNode->prev = nullptr;
+    return newNode;
+}
+
+// Function to input a binary number and store it in a doubly linked list
+Node* inputBinaryNumber() {
+    string binary;
+    cout << "Enter a binary number: ";
+    cin >> binary;
+
+    Node* head = nullptr;
+    Node* tail = nullptr;
+
+    for (char c : binary) {
+        int bit = c - '0';  // Convert char to integer (0 or 1)
+        Node* newNode = createNode(bit);
+
+        if (!head) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+    }
+
+    return head;
+}
+
+// Function to print the binary number stored in the doubly linked list
+void printBinaryNumber(Node* head) {
+    Node* temp = head;
+    while (temp) {
+        cout << temp->bit;
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Function to add two binary numbers and return the result as a new doubly linked list
+Node* addBinary(Node* bin1, Node* bin2) {
+    Node* resultHead = nullptr;   // Head of the result binary number
+    Node* resultTail = nullptr;   // Tail of the result binary number
+    int carry = 0;                // Carry for the binary addition
+
+    // Traverse both binary numbers and add corresponding bits
+    while (bin1 || bin2 || carry) {
+        int bit1 = (bin1) ? bin1->bit : 0;  // If bin1 is not null, get its bit, else 0
+        int bit2 = (bin2) ? bin2->bit : 0;  // If bin2 is not null, get its bit, else 0
+
+        // Sum the bits and the carry
+        int sum = bit1 + bit2 + carry;
+        carry = sum / 2;  // New carry (0 or 1)
+        int resultBit = sum % 2;  // Resulting bit (0 or 1)
+
+        // Create new node for the result and add it to the result list
+        Node* newNode = createNode(resultBit);
+        if (!resultHead) {
+            resultHead = resultTail = newNode;
+        } else {
+            resultTail->next = newNode;
+            newNode->prev = resultTail;
+            resultTail = newNode;
+        }
+
+        // Move to the next bits in bin1 and bin2
+        if (bin1) bin1 = bin1->next;
+        if (bin2) bin2 = bin2->next;
+    }
+
+    return resultHead;
+}
+
+// Main function to test the program
+int main() {
+    // Input two binary numbers
+    Node* binaryNumber1 = inputBinaryNumber();
+    Node* binaryNumber2 = inputBinaryNumber();
+
+    // Display the original binary numbers
+    cout << "First Binary Number: ";
+    printBinaryNumber(binaryNumber1);
+    
+    cout << "Second Binary Number: ";
+    printBinaryNumber(binaryNumber2);
+
+    // Add the binary numbers
+    Node* sum = addBinary(binaryNumber1, binaryNumber2);
+
+    // Display the result of the binary addition
+    cout << "Sum (Binary Addition): ";
+    printBinaryNumber(sum);
+
+    return 0;
+}
