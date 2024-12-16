@@ -120,3 +120,57 @@ int main() {
 
     return 0;
 }
+
+Here is the text for the algorithms from your image:
+
+1. Algorithm: Conversion from Infix to Postfix
+
+Stack S
+char ch
+char element
+while (tokens are available)
+{
+    ch = Read (Token);
+    if (ch is operand)
+    {
+        Print ch;
+    }
+    else
+    {
+        while (priority(ch) <= priority(top of stack))
+        {
+            element = pop(S);
+            print(element);
+        }
+        push(S, ch);
+    }
+}
+while (!Empty(S))
+{
+    element = pop(S);
+    print(element);
+}
+
+
+2. Algorithm: Evaluate Postfix Expression
+
+Initialize (Stack S)
+x = Read Token();
+while (x)
+{
+    if (x is operand)
+    {
+        push(x) onto stack S;
+    }
+    if (x is operator)
+    {
+        operand1 = pop(Stack S);
+        operand2 = pop(Stack S);
+        Evaluate (operand1 operator operand2);
+    }
+    x = Read Next Token();
+}
+
+
+
+
