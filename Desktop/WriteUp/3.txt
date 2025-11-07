@@ -1,0 +1,135 @@
+✅ 1. SQL SELECT Statement (DQL – Data Query Language)
+
+The SELECT statement is used to retrieve data from one or more tables in a database.
+It allows users to extract specific information based on conditions.
+SELECT is part of Data Query Language (DQL) and is the most frequently used SQL command.
+
+Purpose of SELECT:
+
+Display specific columns
+
+Filter rows using conditions
+
+Sort results
+
+Group data
+
+Join multiple tables
+
+Use subqueries for advanced searching
+
+✅ 2. Joins
+
+A join is used to combine data from two or more tables based on a related column, typically a primary key or foreign key.
+Joins help retrieve meaningful information spread across multiple tables in a relational database.
+
+Types of Joins:
+
+Inner Join: Returns only matching rows from the tables.
+
+Left Join: Returns all rows from the left table and matching rows from the right table.
+
+Right Join: Returns all rows from the right table and matching rows from the left.
+
+Full Join: Returns all rows when there is a match in either table.
+
+Joins are essential for queries involving employees, departments, managers, and locations.
+
+✅ 3. Subqueries
+
+A subquery is a query inside another query.
+It is used when the result of one query is required for another query.
+
+Subqueries are commonly used to:
+
+Compare values between rows
+
+Retrieve averages, minimums, maximums
+
+Filter records using values calculated by another query
+
+Perform operations that cannot be done with a single SELECT
+
+Subqueries may appear in the WHERE, FROM, or SELECT clause.
+
+✅ 4. Aggregate Functions
+
+Aggregate functions perform calculations on a group of rows and return a single value.
+
+Common aggregate functions include:
+
+AVG() – returns the average value
+
+SUM() – returns the total
+
+MIN() – returns the minimum value
+
+MAX() – returns the maximum value
+
+COUNT() – counts the number of rows
+
+These are mostly used with GROUP BY to create summarized reports.
+
+✅ 5. GROUP BY Clause
+
+The GROUP BY clause groups rows that have the same values in specified columns.
+It is used when aggregate functions need to be applied to different groups of data.
+
+Examples of grouping:
+
+Employees per department
+
+Salary average per department
+
+Number of employees per location
+
+✅ 6. HAVING Clause
+
+The HAVING clause is used to filter groups of records created by GROUP BY.
+It works like a WHERE clause but applies to grouped data instead of individual rows.
+HAVING is used with aggregate functions, whereas WHERE cannot be used with aggregates.
+
+✅ 7. Conditional Comparisons in Queries
+
+SQL queries often compare:
+
+Salaries of employees
+
+Hiring dates
+
+Department or manager information
+
+These comparisons may involve:
+
+Subqueries
+
+Aggregate values
+
+Joins
+
+Conditions based on specific people such as “employees hired after Jones”
+
+✅ 8. Employee–Manager Relationship
+
+In many databases, the employee table contains a manager_id, which references another employee.
+This creates a hierarchical relationship.
+Using joins, queries can display both employee information and their manager’s information.
+
+✅ 9. Department and Location-Based Queries
+
+Relational databases often split data across tables like:
+
+Employee
+
+Department
+
+Location
+
+Joins are used to connect employees to their departments, and departments to their locations.
+This allows queries like:
+
+Employees who work in US-based departments
+
+Employees in IT departments
+
+Department-wise summaries

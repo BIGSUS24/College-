@@ -1,0 +1,84 @@
+DROP DATABASE IF EXISTS CollegeDB;
+CREATE DATABASE CollegeDB;
+USE CollegeDB;
+
+
+CREATE TABLE Borrower (
+  Roll_no INT,
+  Name VARCHAR(50),
+  DateOfIssue DATE,
+  NameOfBook VARCHAR(50),
+  Status CHAR(1)
+);
+
+CREATE TABLE Fine (
+  Roll_no INT,
+  FineDate DATE,
+  Amt DECIMAL(10,2)
+);
+
+
+INSERT INTO Borrower VALUES
+(101, 'Sakshi', DATE_SUB(CURDATE(), INTERVAL 20 DAY), 'DBMS', 'I'),
+(102, 'Priti', DATE_SUB(CURDATE(), INTERVAL 35 DAY), 'CN', 'I'),
+(103, 'Amit', DATE_SUB(CURDATE(), INTERVAL 10 DAY), 'AI', 'I');
+
+
+DELIMITER //
+
+CREATE PROCEDURE ReturnBook(IN r INT, IN book_name VARCHAR(50))
+BEGIN
+  DECLARE issue_date DATE;
+  DECLARE days_diff INT DEFAULT 0;
+  DECLARE fine_amt DECIMAL(10,2) DEFAULT 0;
+  DECLARE not_found CONDITION FOR SQLSTATE '02000';
+
+  -- Exception Handler: if no record found
+  DECLARE EXIT HANDLER FOR not_found
+  BEGIN
+    SELECT ' No such issued book found!' AS Message;
+  END;
+
+  
+  SELECT DateOfIssue INTO issue_date
+  FROM Borrower
+  WHERE Roll_no = r AND NameOfBook = book_name AND Status = 'I';
+
+  
+  SET days_diff = DATEDIFF(CURDATE(), issue_date);
+
+  
+  IF days_diff BETWEEN 15 AND 30 THEN
+    SET fine_amt = days_diff * 5;
+  ELSEIF days_diff > 30 THEN
+    SET fine_amt = days_diff * 50;
+  ELSE
+    SET fine_amt = 0;
+  END IF;
+
+ 
+  UPDATE Borrower 
+  SET Status = 'R'
+  WHERE Roll_no = r AND NameOfBook = book_name;
+
+ 
+  IF fine_amt > 0 THEN
+    INSERT INTO Fine VALUES (r, CURDATE(), fine_amt);
+  END IF;
+
+  
+  SELECT CONCAT('Book returned successfully. Days held: ', days_diff,
+                ' | Fine Amount: Rs ', fine_amt) AS Message;
+END;
+//
+DELIMITER ;
+
+
+CALL ReturnBook(101, 'DBMS');
+CALL ReturnBook(102, 'CN');
+CALL ReturnBook(103, 'AI');
+CALL ReturnBook(999, 'Unknown');  -- Example of invalid record (shows exception)
+
+
+SELECT * FROM Borrower;
+SELECT * FROM Fine;

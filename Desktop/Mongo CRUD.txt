@@ -1,0 +1,101 @@
+// Create a collection named 'books'
+db.createCollection("books")
+
+// Insert 5 records
+db.books.insertMany([
+  { 
+    TITLE: "mongodb", 
+    DESCRIPTION: "Database tutorial", 
+    BY: "john", 
+    URL: "www.mongodb.com", 
+    TAGS: ["database", "nosql"], 
+    LIKES: 200 
+  },
+  { 
+    TITLE: "nodejs", 
+    DESCRIPTION: "Server-side scripting", 
+    BY: "mary", 
+    URL: "www.nodejs.org", 
+    TAGS: ["javascript", "backend"], 
+    LIKES: 180 
+  },
+  { 
+    TITLE: "nosql overview", 
+    DESCRIPTION: "Concept of NoSQL databases", 
+    BY: "peter", 
+    URL: "www.nosql.org", 
+    TAGS: ["database"], 
+    LIKES: 120 
+  },
+  { 
+    TITLE: "expressjs", 
+    DESCRIPTION: "Web application framework", 
+    BY: "john", 
+    URL: "www.expressjs.com", 
+    TAGS: ["framework"], 
+    LIKES: 90 
+  },
+  { 
+    TITLE: "reactjs", 
+    DESCRIPTION: "Frontend library", 
+    BY: "susan", 
+    URL: "www.reactjs.org", 
+    TAGS: ["frontend", "javascript"], 
+    LIKES: 250 
+  }
+])
+
+// Insert 1 more record with additional fields (username & comments)
+db.books.insertOne({
+  TITLE: "angular", 
+  DESCRIPTION: "Frontend framework", 
+  BY: "alex", 
+  URL: "www.angular.io", 
+  TAGS: ["frontend", "typescript"], 
+  LIKES: 170, 
+  username: "sanketv", 
+  comments: "Good tutorial for beginners"
+})
+
+// Display all documents whose title is 'mongodb'
+db.books.find({ TITLE: "mongodb" })
+
+// Display documents written by 'john' OR whose title is 'mongodb'
+db.books.find({ $or: [ { BY: "john" }, { TITLE: "mongodb" } ] })
+
+// Display documents whose title is 'mongodb' AND written by 'john'
+db.books.find({ $and: [ { TITLE: "mongodb" }, { BY: "john" } ] })
+
+// Display documents whose likes are greater than 150
+db.books.find({ LIKES: { $gt: 150 } })
+
+// Likes > 100 AND (title = 'mongodb' OR written by 'john')
+db.books.find({ 
+  LIKES: { $gt: 100 }, 
+  $or: [ { TITLE: "mongodb" }, { BY: "john" } ] 
+})
+
+// Update title of 'mongodb' to 'mongodb overview'
+db.books.updateOne(
+  { TITLE: "mongodb" }, 
+  { $set: { TITLE: "mongodb overview" } }
+)
+
+// Delete document titled 'nosql overview'
+db.books.deleteOne({ TITLE: "nosql overview" })
+
+// Display exactly two documents written by 'john'
+db.books.find({ BY: "john" }).limit(2)
+
+// Display the second document published by 'john'
+db.books.find({ BY: "john" }).skip(1).limit(1)
+
+// Display all books in sorted fashion (ascending by TITLE)
+db.books.find().sort({ TITLE: 1 })
+
+// Update author of TOC book to 'Vivek Kulkarni'; if not exist, create new
+db.books.updateOne(
+  { TITLE: "TOC" },
+  { $set: { BY: "Vivek Kulkarni" } },
+  { upsert: true }
+)

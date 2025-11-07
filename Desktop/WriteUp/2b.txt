@@ -1,0 +1,33 @@
+DML command 
+Data Manipulation Language (DML) statements are used for managing data in database. DML 
+commands are not auto-committed. It means changes made by DML command are not permanent to 
+database, it can be rolled back. 
+1) INSERT command 
+Insert command is used to insert data into a table. Following is its general syntax, 
+INSERT into table-name values(data1,data2,..) 
+Lets see an example, 
+Consider a table Student with following fields. 
+S_id S_Name age 
+INSERT into Student values(101,'Adam',15); 
+The above command will insert a record into Student table. 
+S_id 
+S_Name 
+age 
+101 Adam 15 
+2) UPDATE command 
+Update command is used to update a row of a table. Following is its general syntax, 
+UPDATE table-name set column-name = value where condition; 
+Lets see an example, 
+update Student set age=18 where s_id=102; 
+Example to Update multiple columns 
+UPDATE Student set s_name='Abhi',age=17 where s_id=103; 
+3) Delete command 
+Delete command is used to delete data from a table. Delete command can also be used with condition to 
+delete a particular row. Following is its general syntax, 
+DELETE from table-name; 
+Example to Delete all Records from a Table 
+DELETE from Student; 
+The above command will delete all the records from Student table. 
+Example to Delete a particular Record from a Table 
+Consider Student table 
+DELETE from Student where s_id=103;

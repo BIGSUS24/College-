@@ -1,0 +1,61 @@
+
+DROP DATABASE IF EXISTS CompanyDB;
+CREATE DATABASE CompanyDB;
+USE CompanyDB;
+
+DROP TABLE IF EXISTS Emp;
+CREATE TABLE Emp (
+  eno INT PRIMARY KEY,
+  name VARCHAR(30),
+  city VARCHAR(30),
+  salary DECIMAL(10,2)
+);
+
+INSERT INTO Emp VALUES
+(101,'Amit','Pune',3500),
+(102,'Sneha','Mumbai',4200),
+(103,'Rohan','Delhi',2500),
+(104,'Priti','Nashik',5000),
+(105,'Komal','Nagpur',3800);
+
+
+DELIMITER //
+CREATE PROCEDURE give_bonus()
+BEGIN
+  DECLARE v_eno INT;
+  DECLARE v_name VARCHAR(30);
+  DECLARE v_salary DECIMAL(10,2);
+  DECLARE done INT DEFAULT 0;
+
+  
+  DECLARE emp_cur CURSOR FOR SELECT eno, name, salary FROM Emp;
+  -- handler to set flag when no more rows
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+  OPEN emp_cur;
+
+  read_loop: LOOP
+    FETCH emp_cur INTO v_eno, v_name, v_salary;
+    IF done = 1 THEN
+      LEAVE read_loop;
+    END IF;
+
+    IF v_salary > 4000 THEN
+      UPDATE Emp SET salary = salary + 5000 WHERE eno = v_eno;
+      SELECT CONCAT(v_name, ' got a 5000 bonus.') AS Message;
+    ELSE
+      UPDATE Emp SET salary = salary + 1000 WHERE eno = v_eno;
+      SELECT CONCAT(v_name, ' got a 1000 bonus.') AS Message;
+    END IF;
+  END LOOP;
+
+  CLOSE emp_cur;
+ 
+  COMMIT;
+END;
+//
+DELIMITER ;
+
+
+CALL give_bonus();
+SELECT * FROM Emp;

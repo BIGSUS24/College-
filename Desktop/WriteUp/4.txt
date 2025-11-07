@@ -1,0 +1,187 @@
+Introduction to PL/SQL
+
+PL/SQL (Procedural Language/SQL) is Oracle’s extension of SQL that adds procedural features such as variables, loops, conditions, and exception handling.
+It allows developers to write logic-based programs directly inside the database.
+
+PL/SQL supports:
+
+Variables and constants
+
+Control structures (IF, loops)
+
+Exception handling
+
+Cursors
+
+Triggers
+
+Procedures and functions
+
+✅ 2. Unnamed (Anonymous) PL/SQL Block
+
+An unnamed PL/SQL block, also called an anonymous block, is a block of PL/SQL code that does not have a name.
+It is not stored permanently in the database and is executed only once when run.
+
+Structure of an Anonymous PL/SQL Block:
+
+DECLARE section – for declaring variables (optional)
+
+BEGIN section – main executable statements
+
+EXCEPTION section – handles errors (optional)
+
+END;
+
+Anonymous blocks are used for:
+
+Small tasks
+
+Quick calculations
+
+Testing logic
+
+One-time operations
+
+✅ 3. Control Structures in PL/SQL
+
+Control structures allow decision making and looping inside PL/SQL programs.
+
+✅ IF – THEN – ELSE
+
+Used to perform actions based on conditions.
+
+IF condition
+
+IF-ELSE
+
+IF-ELSEIF
+
+✅ Loops
+
+PL/SQL supports 3 types of loops:
+
+Basic LOOP
+
+FOR LOOP
+
+WHILE LOOP
+
+Control structures allow:
+
+Checking number of days
+
+Calculating fine
+
+Changing book status
+
+Applying different conditions for fines
+
+✅ 4. Exception Handling in PL/SQL
+
+Exceptions are errors that occur during execution.
+PL/SQL provides a mechanism to handle such errors gracefully.
+
+✅ Types of Exceptions
+
+Predefined (system) exceptions
+Example: NO_DATA_FOUND, TOO_MANY_ROWS
+
+User-defined exceptions
+Created by the programmer
+
+Named exception handlers
+A specific handler is defined for a known exception
+
+✅ Why Exception Handling is Important?
+
+Prevents program failure
+
+Provides meaningful error messages
+
+Allows the program to continue safely
+
+Helps maintain data integrity
+
+In the assignment, exception handling is used to manage situations where:
+
+Roll number does not exist
+
+Book details are not found
+
+Incorrect input is given
+
+✅ 5. Problem Context (Library Fine System)
+
+The assignment demonstrates how PL/SQL logic works using a library management example.
+
+Two tables are given:
+
+Borrower – Contains student details, book name, date of issue, status
+
+Fine – Stores fine amount and date for students returning books late
+
+The PL/SQL block must:
+
+Accept roll number and book name
+
+Calculate number of delayed days
+
+Apply fine rules:
+
+15–30 days → ₹5 per day
+
+More than 30 days → ₹50 per day
+
+Insert fine details into the fine table
+
+Change book status from “issued” to “returned”
+
+Handle errors using exceptions
+
+✅ 6. Use of DATEDIFF / Date Calculations
+
+PL/SQL can calculate the difference between dates to determine:
+
+How many days the book is overdue
+
+Whether a fine should be applied
+
+Fine amount based on number of days
+
+Date difference is essential for:
+
+Determining if fine is needed
+
+Calculating exact fine amount
+
+✅ 7. Business Logic Implementation
+
+The assignment shows how real-world business logic is implemented using PL/SQL:
+
+Condition checking using IF statements
+
+Inserting data into Fine table if fine exists
+
+Updating Borrower table
+
+Handling missing data with an exception handler
+
+This demonstrates how PL/SQL can automate tasks that cannot be done with normal SQL alone.
+
+✅ 8. Importance of the Assignment
+
+This assignment teaches:
+
+How to write PL/SQL blocks
+
+How to use variables
+
+How to use IF conditions
+
+How to use exceptions
+
+How to interact with multiple tables
+
+How to implement practical business rules
+
+It is one of the core foundations of PL/SQL programming.

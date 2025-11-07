@@ -1,0 +1,82 @@
+// Step 1: Create Collection
+db.createCollection("Order");
+
+// Step 2: Insert Documents
+db.Order.insertMany([
+  { Customer_id: 'A1', Amount: 400, Status: 'P' },
+  { Customer_id: 'B1', Amount: 300, Status: 'D' },
+  { Customer_id: 'A1', Amount: 200, Status: 'F' },
+  { Customer_id: 'C1', Amount: 200, Status: 'F' },
+  { Customer_id: 'B1', Amount: 700, Status: 'P' },
+  { Customer_id: 'B1', Amount: 800, Status: 'P' }
+]);
+
+// Step 3: Display All Documents
+print("All Documents:");
+db.Order.find().forEach(doc => printjson(doc));
+
+// Step 4: MapReduce – Sum of Amount for Each Customer (Status = 'P')
+var mapSum = function() {
+  emit(this.Customer_id, this.Amount);
+};
+
+var reduceSum = function(key, values) {
+  return Array.sum(values);
+};
+
+db.Order.mapReduce(mapSum, reduceSum, {
+  query: { Status: "P" },
+  out: "Order_total"
+});
+
+print("\nTotal Amount (Status = 'P'):");
+db.Order_total.find().forEach(doc => printjson(doc));
+
+// Step 5: MapReduce – Average Amount of Each Customer
+var mapAvg = function() {
+  emit(this.Customer_id, this.Amount);
+};
+
+var reduceAvg = function(key, values) {
+  return Array.avg(values);
+};
+
+db.Order.mapReduce(mapAvg, reduceAvg, {
+  out: "Order_average"
+});
+
+print("\nAverage Amount of Each Customer:");
+db.Order_average.find().forEach(doc => printjson(doc));
+
+// Step 6: MapReduce – Minimum Amount of Each Customer
+var mapMin = function() {
+  emit(this.Customer_id, this.Amount);
+};
+
+var reduceMin = function(key, values) {
+  return Math.min.apply(Math, values);
+};
+
+db.Order.mapReduce(mapMin, reduceMin, {
+  out: "Order_minimum"
+});
+
+print("\nMinimum Amount of Each Customer:");
+db.Order_minimum.find().forEach(doc => printjson(doc));
+
+// Step 7: MapReduce – Maximum Amount of Each Customer (Status = 'F')
+var mapMax = function() {
+  emit(this.Customer_id, this.Amount);
+};
+
+var reduceMax = function(key, values) {
+  return Math.max.apply(Math, values);
+};
+
+db.Order.mapReduce(mapMax, reduceMax, {
+  query: { Status: "F" },
+  out: "Order_Maximum_F"
+});
+
+print("\nMaximum Amount (Status = 'F'):");
+db.Order_Maximum_F.find().forEach(doc => printjson(doc));

@@ -1,0 +1,142 @@
+1. Introduction to Cursors in PL/SQL
+
+A cursor in PL/SQL is a mechanism that allows row-by-row processing of a query result set.
+Unlike SQL, which works on sets of rows at once, PL/SQL can use cursors to process each row individually.
+
+Cursors are necessary when:
+
+Each row requires different logic
+
+Conditional operations must be applied row-by-row
+
+Loop-based processing is needed
+
+This assignment uses a cursor to update employee salaries based on conditions.
+
+✅ 2. Types of Cursors
+
+PL/SQL supports two types of cursors:
+
+✅ 1. Implicit Cursor
+
+Automatically created by Oracle/MySQL for simple queries
+
+Used for single-row operations (INSERT, UPDATE, DELETE, SELECT INTO)
+
+Does not need to be explicitly declared
+
+✅ 2. Explicit Cursor
+
+Manually created by the programmer
+
+Used when a query returns multiple rows
+
+Allows row-by-row control
+
+Requires open–fetch–process–close cycle
+
+Assignment 6 uses an explicit cursor.
+
+✅ 3. Components of an Explicit Cursor
+
+An explicit cursor has 4 main steps:
+
+✅ 1. Declaration
+
+Defines the cursor with a SELECT query.
+
+✅ 2. Opening the Cursor
+
+Loads the result set into memory.
+
+✅ 3. Fetching Rows
+
+Retrieves one row at a time from the cursor into variables.
+
+✅ 4. Closing the Cursor
+
+Releases memory after processing is complete.
+
+✅ 4. Cursor Looping Mechanism
+
+A cursor is typically used inside a loop to process each row until no more rows remain.
+
+The steps include:
+
+FETCH a row
+
+EXIT loop when no more rows
+
+Apply business logic to the fetched row
+
+Repeat
+
+Assignment 6 uses:
+
+A LOOP to fetch each employee
+
+A continue handler / exit flag to stop when rows end
+
+✅ 5. Business Logic in the Assignment
+
+The assignment demonstrates how PL/SQL cursors can be used to apply different logic based on each row’s data.
+
+✅ Problem Purpose
+
+Increase employee salaries depending on their current salary:
+
+If salary > 4000 → give ₹5000 bonus
+
+If salary < 4000 → give ₹1000 bonus
+
+✅ Cursor Functionality
+
+Cursor selects eno and salary from emp table
+
+Each row is fetched into variables
+
+IF condition checks salary
+
+UPDATE statement modifies salary for each employee
+
+This shows how cursors enable row-based operations that SQL alone cannot do efficiently.
+
+✅ 6. Exception Handling with Cursors
+
+The assignment uses:
+
+✅ CONTINUE HANDLER FOR NOT FOUND
+
+This handler is triggered when cursor tries to fetch beyond the last row.
+
+It sets a boolean flag (exit_loop = TRUE) so that:
+
+The loop stops automatically
+
+No error is raised
+
+This is essential for safe cursor operations.
+
+✅ 7. Importance of Cursors
+
+Cursors are important in PL/SQL because they allow:
+
+Row-by-row processing
+
+Complex conditional logic for each row
+
+Fine-grained control over update operations
+
+Handling business rules within the database
+
+In real applications, cursors are used for:
+
+Payroll processing
+
+Financial calculations
+
+Result processing
+
+Data migration
+
+Auditing and logs

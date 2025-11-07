@@ -1,0 +1,134 @@
+
+DROP DATABASE IF EXISTS CollegeDB;
+CREATE DATABASE CollegeDB;
+USE CollegeDB;
+
+
+CREATE TABLE Student (
+    StudID INT,
+    Name VARCHAR(50),
+    Address VARCHAR(100),
+    Marks INT
+);
+
+
+CREATE TABLE Employee (
+    EmployeeID INT,
+    Name VARCHAR(50),
+    Address VARCHAR(100),
+    Salary DECIMAL(10,2),
+    DateOfJoining DATE,
+    Department VARCHAR(50)
+);
+
+
+CREATE TABLE Weather (
+    CityID INT,
+    CityName VARCHAR(50),
+    MinTemp FLOAT,
+    MaxTemp FLOAT
+);
+
+
+
+INSERT INTO Student VALUES
+(1, 'Sakshi', 'Pune', 88),
+(2, 'Priti', 'Nashik', 92),
+(3, 'Amit', 'Mumbai', 76),
+(4, 'Raj', 'Nagpur', 81);
+SELECT * FROM Student;
+
+
+INSERT INTO Employee VALUES
+(101, 'Rohan', 'Pune', 45000.00, '2020-05-10', 'IT'),
+(102, 'Meena', 'Mumbai', 55000.00, '2019-06-15', 'HR'),
+(103, 'Amit', 'Nashik', 60000.00, '2021-03-20', 'Finance');
+SELECT * FROM Employee;
+
+
+INSERT INTO Weather VALUES
+(1, 'Pune', 21.5, 34.2),
+(2, 'Mumbai', 26.0, 35.5),
+(3, 'Nashik', 19.2, 32.0);
+SELECT * FROM Weather;
+
+
+ALTER TABLE Student
+MODIFY StudID INT NOT NULL,
+MODIFY Name VARCHAR(50) NOT NULL,
+MODIFY Address VARCHAR(100) NOT NULL,
+MODIFY Marks INT NOT NULL;
+
+
+ALTER TABLE Employee
+MODIFY EmployeeID INT NOT NULL,
+MODIFY Name VARCHAR(50) NOT NULL,
+MODIFY Address VARCHAR(100) NOT NULL,
+MODIFY Salary DECIMAL(10,2) NOT NULL,
+MODIFY DateOfJoining DATE NOT NULL,
+MODIFY Department VARCHAR(50) NOT NULL;
+
+SELECT * FROM Student;
+SELECT * FROM Employee;
+
+
+
+ALTER TABLE Student
+ADD PRIMARY KEY (StudID);
+SELECT * FROM Student;
+
+
+
+CREATE VIEW JoiningInfo AS
+SELECT EmployeeID, Name, DateOfJoining
+FROM Employee;
+SELECT * FROM JoiningInfo;
+
+
+CREATE INDEX idx_student_id ON Student(StudID);
+CREATE INDEX idx_employee_id ON Employee(EmployeeID);
+CREATE INDEX idx_weather_cityid ON Weather(CityID);
+
+
+SHOW INDEXES FROM Student;
+SHOW INDEXES FROM Employee;
+SHOW INDEXES FROM Weather;
+
+
+CREATE VIEW MarksInfo AS
+SELECT StudID, Marks FROM Student;
+SELECT * FROM MarksInfo;
+
+
+RENAME TABLE Weather TO WeatherData;
+SHOW TABLES;
+
+
+ALTER TABLE WeatherData DROP COLUMN CityName;
+SELECT * FROM WeatherData;
+
+
+ALTER TABLE Student ADD COLUMN Grade VARCHAR(20);
+SELECT * FROM Student;
+
+
+
+UPDATE Student SET Grade = 'Distinction' WHERE Marks >= 85;
+UPDATE Student SET Grade = 'First Class' WHERE Marks BETWEEN 70 AND 84;
+SELECT * FROM Student;
+
+
+
+CREATE VIEW DistinctionStudents AS
+SELECT * FROM Student WHERE Grade = 'Distinction';
+SELECT * FROM DistinctionStudents;
+
+
+ALTER TABLE Student MODIFY StudID INT AUTO_INCREMENT;
+SELECT * FROM Student;
+
+
+
+CREATE VIEW Emp_Info AS
+SELECT * FROM Employee;
+SELECT * FROM Emp_Info;

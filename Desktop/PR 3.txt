@@ -1,0 +1,137 @@
+
+CREATE DATABASE IF NOT EXISTS OrgDB;
+USE OrgDB;
+
+
+DROP TABLE IF EXISTS Employee;
+DROP TABLE IF EXISTS Departments;
+DROP TABLE IF EXISTS Locations;
+
+
+CREATE TABLE Locations (
+    location_id INT PRIMARY KEY,
+    street_address VARCHAR(100),
+    postal_code VARCHAR(10),
+    city VARCHAR(50),
+    state VARCHAR(50),
+    country_id VARCHAR(10)
+);
+
+
+CREATE TABLE Departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50),
+    manager_id INT,
+    location_id INT,
+    FOREIGN KEY (location_id) REFERENCES Locations(location_id)
+);
+
+
+CREATE TABLE Employee (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    hire_date DATE,
+    salary DECIMAL(10,2),
+    job_title VARCHAR(50),
+    manager_id INT,
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+);
+
+
+
+INSERT INTO Locations (location_id, street_address, postal_code, city, state, country_id) VALUES
+(101, 'MG Road', '411001', 'Pune', 'Maharashtra', 'IN'),
+(102, 'Park Street', '560001', 'Bangalore', 'Karnataka', 'IN'),
+(103, '5th Ave', '10001', 'New York', 'New York', 'US');
+
+
+INSERT INTO Departments (department_id, department_name, manager_id, location_id) VALUES
+(10, 'IT', 1001, 101),
+(20, 'HR', 1002, 102),
+(30, 'Finance', 1003, 103);
+
+
+INSERT INTO Employee (employee_id, first_name, last_name, hire_date, salary, job_title, manager_id, department_id) VALUES
+(1001, 'Amit', 'Patil', '2019-05-10', 50000.00, 'Manager', NULL, 10),
+(1002, 'Sneha', 'Deshmukh', '2020-06-15', 45000.00, 'Manager', NULL, 20),
+(1003, 'Rahul', 'Singh', '2021-07-20', 40000.00, 'Analyst', 1001, 10),
+(1004, 'Priti', 'Joshi', '2022-01-12', 42000.00, 'Developer', 1001, 10),
+(1005, 'Rohan', 'Kadam', '2018-09-18', 35000.00, 'Clerk', 1002, 20),
+(1006, 'Meena', 'Jones', '2021-10-30', 37000.00, 'Analyst', 1003, 30),
+(1007, 'Sagar', 'Naik', '2022-04-22', 48000.00, 'Developer', 1001, 10),
+(1008, 'Komal', 'More', '2019-12-11', 30000.00, 'Support', 1003, 30);
+
+
+SELECT first_name, last_name, salary
+FROM Employee
+WHERE salary > (
+    SELECT salary FROM Employee WHERE last_name = 'Singh'
+);
+
+
+SELECT e.first_name, e.last_name
+FROM Employee e
+JOIN Departments d ON e.department_id = d.department_id
+JOIN Locations l ON d.location_id = l.location_id
+WHERE e.manager_id IS NOT NULL AND l.country_id = 'US';
+
+
+SELECT first_name, last_name
+FROM Employee e
+JOIN Departments d ON e.department_id = d.department_id
+WHERE d.department_name = 'IT';
+
+
+
+SELECT first_name, last_name, salary
+FROM Employee
+WHERE salary > (SELECT AVG(salary) FROM Employee);
+
+
+
+SELECT e.first_name, e.last_name, e.salary
+FROM Employee e
+JOIN Departments d ON e.department_id = d.department_id
+WHERE e.salary > (SELECT AVG(salary) FROM Employee) AND d.department_name = 'IT';
+
+
+
+SELECT first_name, last_name, salary
+FROM Employee
+WHERE salary IN (
+    SELECT MIN(salary) FROM Employee GROUP BY department_id
+);
+
+
+
+SELECT e.employee_id, e.first_name, e.last_name, e.salary
+FROM Employee e
+WHERE e.salary > (
+    SELECT AVG(salary)
+    FROM Employee
+    WHERE department_id = e.department_id
+);
+
+
+
+SELECT e.employee_id, e.last_name AS Employee_Name,
+       e.manager_id, m.last_name AS Manager_Name
+FROM Employee e
+LEFT JOIN Employee m ON e.manager_id = m.employee_id;
+
+
+
+SELECT first_name, last_name, hire_date
+FROM Employee
+WHERE hire_date > (
+    SELECT hire_date FROM Employee WHERE last_name = 'Jones'
+);
+
+
+
+SELECT d.department_name, COUNT(e.employee_id) AS No_of_Employees
+FROM Departments d
+LEFT JOIN Employee e ON d.department_id = e.department_id
+GROUP BY d.department_name;

@@ -1,0 +1,146 @@
+1. Introduction to Triggers
+
+A trigger is a special type of stored program in a database that is automatically executed when a specific event occurs on a table.
+
+Triggers allow the database to take automatic action in response to:
+
+INSERT
+
+UPDATE
+
+DELETE
+
+Triggers enforce business rules and maintain data integrity without requiring manual intervention.
+
+✅ 2. Purpose of Triggers
+
+Triggers are used when we want the database system to:
+
+Keep logs or history of changes
+
+Enforce rules before or after data modification
+
+Validate or modify input data
+
+Automatically update related tables
+
+Maintain calculated values
+
+In this assignment, the trigger automatically updates total capacity in another table when a new work center is inserted.
+
+✅ 3. Types of Triggers
+
+Triggers can be classified based on when and how they are fired.
+
+✅ Based on Timing:
+
+BEFORE Trigger
+Executes before the statement modifies the table.
+Used for validation or modifying data before insert/update.
+
+AFTER Trigger
+Executes after the statement completes.
+Used when dependent data must be updated only after the row exists.
+
+✅ Based on Event:
+
+INSERT Trigger
+
+UPDATE Trigger
+
+DELETE Trigger
+
+Assignment 7 uses a BEFORE INSERT trigger.
+
+✅ 4. Row-Level and Statement-Level Triggers
+✅ Row-Level Trigger
+
+Executes once for each row affected by the triggering event
+
+Uses FOR EACH ROW clause
+
+Can access NEW and OLD record values
+
+✅ Statement-Level Trigger
+
+Executes only once for the entire SQL statement
+
+Does NOT use FOR EACH ROW
+
+This assignment uses a Row-Level Trigger because it runs once for each inserted row.
+
+✅ 5. NEW and OLD References
+
+Triggers can use two virtual records:
+
+NEW → the new row being inserted or updated
+
+OLD → the original row before update or delete
+
+In this assignment:
+
+NEW.capacity refers to the capacity value being inserted into the WorkCenters table.
+
+✅ 6. Business Logic in the Assignment
+
+The assignment uses a trigger to automatically update a summary table.
+
+✅ Tables Used
+
+WorkCenters → stores individual work center records
+
+WorkCenterStats → stores total capacity based on all work centers
+
+✅ Trigger Behavior
+
+Whenever a new work center is inserted:
+
+If WorkCenterStats already has a record:
+→ Add the new capacity to existing total
+
+If it is empty:
+→ Insert a new total
+
+This enforces automatic aggregation of capacity.
+
+✅ 7. Importance of Using Triggers
+
+Triggers improve database reliability and consistency because they:
+
+✅ Automate repetitive tasks
+
+No need to manually update WorkCenterStats.
+
+✅ Maintain data integrity
+
+Ensures total capacity is always correct.
+
+✅ Reduce application-side load
+
+Logic is performed inside the database instead of external code.
+
+✅ Provide real-time updates
+
+Changes happen instantly when data is inserted.
+
+✅ 8. Advantages of Triggers
+
+Ensures accuracy and consistency
+
+Automatically enforces business rules
+
+Reduces possibility of human errors
+
+Can prevent invalid data entry
+
+Helps maintain audit logs
+
+✅ 9. Limitations of Triggers
+
+Harder to debug than stored procedures
+
+Can cause hidden performance overhead
+
+Too many triggers complicate database behavior
+
+However, in controlled scenarios like this assignment, triggers are extremely useful.

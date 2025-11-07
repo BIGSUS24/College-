@@ -1,0 +1,143 @@
+Data Definition Languages (DDL) 
+Data definition language contains the commands which are used to create and destroy the 
+databases and their objects (like table, view, index etc) 
+Following are commands under DDL 
+1. To create the database instance- CREATE 
+2. To alter the structure of database- ALTER 
+3. To rename database instances- RENAME 
+4. To drop the instances- DROP 
+A) DDL Commands on database object: Table 
+The table creation command requires the following details − 
+• Name of the table 
+• Name of the fields 
+• Definitions for each 
+field Syntax 
+Here is a generic SQL syntax to create a MySQL table – 
+CREATE TABLE table_name (column_name column_type); 
+Now, we will create the following table in the data1 database. 
+root@host# mysql -u root -p 
+Enter password:******* 
+mysql> use data1; 
+Database changed 
+mysql>create table Employee( 
+employee_no INT NOT NULL AUTO_INCREMENT, 
+employee_name varchar(10) NOT NULL, 
+joining_date DATE, 
+salary INT, 
+PRIMARY KEY(employee_no) 
+); 
+Query OK, 0 rows affected (0.16 sec) 
+mysql> 
+Here, a few items need explanation − 
+• Field Attribute NOT NULL is being used because we do not want this field to be NULL. 
+So, if a user will try to create a record with a NULL value, then MySQL will raise an 
+error. 
+• Field Attribute AUTO_INCREMENT tells MySQL to go ahead and add the next 
+available number to the id field. 
+• Keyword PRIMARY KEY is used to define a column as a primary key. You can use 
+multiple columns separated by a comma to define a primary key. 
+1) Creating Table from Existing Table 
+Consider the existing table Employee 
+Create table table_name as select * from existing_table_name; 
+For Example 
+Create table newEmployee1 as select * from Employee; 
+// The newly created table newEmployee1 will include all the field and records as in Employee table 
+2) Creating Table having specific field but all the records from existing table 
+Syntax: 
+Create table table_name as select filed1, field2… from existing_table Name; 
+For example: 
+Create table newEmployee2 as select Employee_no,Employee_name from Employee; 
+B) Modifying Table 
+ALTER TABLE query is used to modify structure of a table which is already exists in the 
+database. We can add, delete, or modify column 
+1) Adding new column in a 
+table Syntax: 
+ALTER TABLE table_name ADD Columan-name datatype; 
+For example 
+Create table Employee1(Employee_no integer (3), 
+Employee_name varchar (20), 
+joining_date date, 
+Salary integer (6)); 
+ALTER TABLE Employee1 ADD Department varchar (15); 
+2) Dropping column from table 
+Syntax: ALTER TABLE table_name DROP COLUMN Column_name; 
+ALTER TABLE Employee1 DROP column Department; 
+3) Modifying Column of a table 
+Syntax: ALTER TABLE table_name MODIFY COLUMN column_name data_type 
+ALTER TABLE Employee1 MODIFY COLUMN Employee_no varchar (4); 
+4) Renaming Table 
+Syntax: rename table current_table to new_table_name; 
+Rename table Employee1 to Emptable; 
+5) Drop Table (User to delete the 
+table) Syntax: drop table 
+table_name; 
+drop table Emptable; 
+DDL Commands on Views 
+In SQL a view is virtual table containing the records of one or more tables based on SQL 
+statement executed. Just like a real table, view contains rows and columns. You can add SQL 
+functions, WHERE and JOIN statement to a view and presents the data as if the data were coming 
+from one single table. 
+The changes made in a table get automatically reflected in original table and vice versa. 
+A) 
+Creating View 
+Consider we have existing table as Employee (Employee_no, Employee_name, joining_date,salary) 
+1) Creating view having all records and fields from existing 
+table Syntax: 
+CREATE or replace VIEW view_name as 
+SELECT Column1,Column2,… FROM table_name Where Condition; 
+create table Employee2(Employee_no int,Employee_name 
+varchar(10),joining_ date date,salary int); 
+Create or replace view Emp_view1 as select * from Employee2; 
+2) Creating view having specific fields but all the records from 
+existing table Syntax: 
+Create or replace view view_name as 
+Select field1,field2… from existing_table_name; 
+Create or replace view Emp_view2 as select Employee_no,Employee_name from Employee; 
+B) 
+Updating View 
+Updating query is used to update the records of view. Updation in view reflects the original table 
+also. 
+Syntax: 
+UPDATE view_name 
+Set field_name=new_Value where condition; 
+UPDATE Emp_view1 set Salary=73000 where Employee_no=101; 
+C) Dropping View 
+Syntax: DROP view view_name 
+DROP view Emp_view2; 
+DDL Commands on Index 
+An Index is a pointer to data in a table. An index in a database is similar to the alphabetical index of 
+a book presents at the end of book. 
+Indexes can be created or dropped with no effect on data. 
+A) Creating Index 
+CREATE INDEX statement is used to create an INDEX. In this statement we have to 
+mention name of the index, the table and column and whether the index is in ascending or 
+descending order. 
+Syntax: 
+CREATE INDEX Syntax 
+Creates an index on a table. Duplicate values are 
+allowed: CREATE INDEX index_name 
+ON table_name (column1, column2, ...); 
+CREATE UNIQUE INDEX Syntax 
+Creates a unique index on a table. Duplicate values are not 
+allowed: CREATE UNIQUE INDEX index_name 
+ON table_name (column1, column2, ...); 
+ASC or DESC is placed at end of column for ascending or descending order. 
+CREATE INDEX emp_ind1 on Emp(Emo_no ASC); 
+B) Displaying Index 
+To display index information regarding table following query is used 
+Syntax: show index from table_name; 
+Show index from Emp; 
+C) Dropping Index 
+To drop index of a table following query is 
+used Syntax: Drop index index_name on 
+table_name; 
+Drop index emp1_ind1 on emp; 
+DDL Commands of Sequence: 
+A Sequence is a set of integers. Sequences are generated in order as per requirements.Sequences are 
+used to create unique values for the rows. 
+Create table emp2(empno int auto_increment,ename varchar(10),sal int, primary key(empno)); 
+DDL Commands on Synonym 
+A synonym is an alternative name for objects such as tables, views, sequences, stored 
+procedures, and other database objects. You generally use synonyms when you are granting 
+access to an object from another schema and you don't want the users to have to worry about 
+knowing which schema owns the object.

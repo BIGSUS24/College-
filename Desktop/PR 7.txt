@@ -1,0 +1,41 @@
+
+DROP DATABASE IF EXISTS FactoryDB;
+CREATE DATABASE FactoryDB;
+USE FactoryDB;
+
+CREATE TABLE WorkCenters (
+  CenterID INT PRIMARY KEY AUTO_INCREMENT,
+  CenterName VARCHAR(50),
+  Capacity INT
+);
+
+
+CREATE TABLE WorkCenterStats (
+  TotalCapacity INT
+);
+
+
+INSERT INTO WorkCenterStats VALUES (0);
+
+
+DELIMITER //
+CREATE TRIGGER after_workcenter_insert
+AFTER INSERT ON WorkCenters
+FOR EACH ROW
+BEGIN
+
+  UPDATE WorkCenterStats
+  SET TotalCapacity = TotalCapacity + NEW.Capacity;
+END;
+//
+DELIMITER ;
+
+
+INSERT INTO WorkCenters (CenterName, Capacity) VALUES
+('Assembly', 50),
+('Painting', 30),
+('Packing', 20);
+
+
+SELECT * FROM WorkCenters;
+SELECT * FROM WorkCenterStats;

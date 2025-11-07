@@ -1,0 +1,127 @@
+
+CREATE DATABASE IF NOT EXISTS CompanyDB;
+USE CompanyDB;
+
+
+
+DROP TABLE IF EXISTS Employee;
+DROP TABLE IF EXISTS Employee2;
+
+
+
+CREATE TABLE Employee (
+    Employee_id INT PRIMARY KEY,
+    First_name VARCHAR(50),
+    Last_name VARCHAR(50),
+    Salary DECIMAL(10,2),
+    Joining_date DATE,
+    Department VARCHAR(50)
+);
+
+
+INSERT INTO Employee VALUES
+(1, 'Amit', 'Patil', 18000, '2021-01-15', 'IT'),
+(2, 'Sneha', 'Deshmukh', 25000, '2020-05-20', 'HR'),
+(3, 'Rahul', 'Sharma', 30000, '2019-07-10', 'Finance'),
+(4, 'Priya', 'Kadam', 15000, '2022-02-25', 'Sales'),
+(5, 'Anjali', 'Jadhav', 22000, '2018-03-18', 'IT'),
+(6, 'Rohan', 'Kulkarni', 27000, '2020-06-09', 'Finance'),
+(7, 'Meena', 'Joshi', 19000, '2021-09-14', 'HR'),
+(8, 'Sagar', 'Bhosale', 35000, '2017-11-03', 'IT'),
+(9, 'Ashwini', 'More', 17000, '2021-08-22', 'Sales'),
+(10, 'Deepak', 'Gawade', 26000, '2019-12-05', 'Finance'),
+(11, 'Aarav', 'Naik', 19500, '2023-01-11', 'IT'),
+(12, 'Komal', 'Pawar', 40000, '2018-10-19', 'HR');
+
+
+
+SELECT First_name, Last_name FROM Employee;
+SELECT DISTINCT Department FROM Employee;
+
+
+
+SELECT
+    First_name,
+    YEAR(Joining_date) AS Joining_Year,
+    MONTH(Joining_date) AS Joining_Month,
+    DAY(Joining_date) AS Joining_Day
+FROM Employee;
+
+
+
+SELECT * FROM Employee ORDER BY Salary ASC;
+
+
+SELECT * FROM Employee WHERE First_name LIKE 'A%';
+
+
+UPDATE Employee
+SET Salary = Salary + 5000
+WHERE Salary < 20000;
+
+
+UPDATE Employee
+SET Department = NULL
+WHERE Employee_id = 4;
+
+
+SELECT Department, MIN(Salary) AS Min_Salary
+FROM Employee
+GROUP BY Department;
+
+
+SELECT Department, AVG(Salary) AS Avg_Salary
+FROM Employee
+GROUP BY Department
+ORDER BY Avg_Salary ASC;
+
+
+CREATE TABLE Employee2 (
+    Employee_id INT PRIMARY KEY,
+    Employee_name VARCHAR(50),
+    City VARCHAR(50),
+    Company_Name VARCHAR(50),
+    Salary DECIMAL(10,2)
+);
+
+
+INSERT INTO Employee2 VALUES
+(1, 'Amit', 'Pune', 'IBM', 28000),
+(2, 'Priti', 'Mumbai', 'Infosys', 35000),
+(3, 'Sagar', 'Pune', 'TCS', 25000),
+(4, 'Rohan', 'Delhi', 'IBM', 40000),
+(5, 'Sneha', 'Pune', 'Infosys', 31000),
+(6, 'Aarav', 'Nashik', 'IBM', 33000),
+(7, 'Komal', 'Pune', 'IBM', 45000),
+(8, 'Meena', 'Mumbai', 'Wipro', 27000),
+(9, 'Raj', 'Pune', 'Infosys', 29000),
+(10, 'Nisha', 'Bangalore', 'IBM', 50000);
+
+
+SELECT * FROM Employee2
+WHERE Company_Name = 'IBM' AND City = 'Pune';
+
+
+SELECT Employee_name, City
+FROM Employee2
+WHERE Company_Name = 'Infosys' OR Salary > 30000;
+
+
+SELECT * FROM Employee2
+WHERE Company_Name = 'IBM' AND City <> 'Mumbai';
+
+
+
+SELECT Company_Name, MAX(Salary) AS Max_Salary
+FROM Employee2
+GROUP BY Company_Name;
+
+
+
+SELECT DISTINCT Company_Name
+FROM Employee2
+WHERE Salary > (
+    SELECT AVG(Salary)
+    FROM Employee2
+    WHERE Company_Name = 'IBM'
+);

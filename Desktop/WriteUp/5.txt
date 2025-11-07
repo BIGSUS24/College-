@@ -1,0 +1,183 @@
+✅ 1. Introduction to Stored Procedures and Stored Functions
+
+In PL/SQL, Stored Procedures and Stored Functions are named program units stored permanently inside the database.
+They allow complex operations and business logic to be executed using a single call.
+
+Both are compiled once and stored in the database, improving performance and reusability.
+
+✅ 2. Stored Procedure
+
+A stored procedure is a PL/SQL program that performs a specific task but does not return a value directly.
+
+✅ Characteristics:
+
+Can accept input parameters (IN)
+
+Can return output through OUT parameters
+
+Does not return a value using RETURN keyword
+
+Can perform multiple operations like INSERT, UPDATE, DELETE
+
+Useful for business logic and automation
+
+✅ Uses:
+
+Categorizing students based on marks
+
+Updating tables
+
+Applying conditions (IF-ELSE)
+
+Executing multiple SQL statements as a single unit
+
+In this assignment, the procedure proc_grade classifies students based on their marks.
+
+✅ 3. Stored Function
+
+A stored function is similar to a procedure but must return a single value using the RETURN statement.
+
+✅ Characteristics:
+
+Always returns a value
+
+Can accept input parameters
+
+Cannot return multiple OUT parameters
+
+Can be used inside SELECT statements
+
+✅ Uses:
+
+Calculations (marks → grade)
+
+Returning computed values
+
+Performing business logic and giving output
+
+In the assignment, final_result3() is a stored function that:
+
+Accepts roll number
+
+Fetches marks and name
+
+Calls procedure to get grade
+
+Inserts final data into Result table
+
+Returns roll number
+
+✅ 4. Control Structures in Stored Procedures
+
+Stored procedures and functions support IF-THEN-ELSE conditions to implement logic.
+
+The assignment uses nested IF statements to classify marks into:
+
+Distinction
+
+First Class
+
+Higher Second Class
+
+Second Class
+
+Pass
+
+Fail
+
+Control structures allow:
+
+Checking ranges of marks
+
+Assigning grade text
+
+Inserting results into table
+
+✅ 5. Parameter Types in PL/SQL
+
+PL/SQL supports three kinds of parameters:
+
+✅ IN Parameter
+
+Used for input only
+
+Value cannot be changed inside procedure
+
+Example: marks (in assignment)
+
+✅ OUT Parameter
+
+Used to send output back to the caller
+
+Example: class (grade)
+
+✅ INOUT Parameter
+
+Acts as both input and output
+
+✅ 6. Business Logic Implementation
+
+Stored procedures make it easy to implement business logic such as:
+
+Categorizing students
+
+Storing results in tables
+
+Calculating class based on mark ranges
+
+These units reduce duplication and centralize logic.
+
+✅ 7. Advantages of Stored Procedures and Functions
+✅ Performance
+
+Compiled once and stored, so faster to run.
+
+✅ Reusability
+
+Can be called multiple times instead of rewriting the logic.
+
+✅ Security
+
+Sensitive operations can be protected inside procedures.
+
+✅ Reduced Network Load
+
+Multiple SQL statements run within the database in a single call.
+
+✅ Maintainability
+
+Changes in logic require modifying only one stored unit.
+
+✅ 8. Use Case in This Assignment
+
+The assignment demonstrates:
+
+Stored Procedure (proc_grade):
+
+Inputs: marks
+
+Outputs: grade
+
+Uses IF-ELSE ladder
+
+Categorizes students based on marks
+
+Stored Function (final_result3):
+
+Accepts roll number
+
+Fetches student marks
+
+Calls stored procedure
+
+Inserts final result into table
+
+Returns roll number
+
+Together, they show how PL/SQL is used to implement real-world systems like result processing.
+
+✅ 9. Conclusion
+
+Stored procedures and functions are powerful tools in PL/SQL that allow programmers to embed complex logic inside the database.
+They increase performance, maintainability, and security.
+This assignment focuses on classifying students based on marks using procedures and returning structured results using functions.

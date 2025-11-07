@@ -1,0 +1,83 @@
+CREATE DATABASE CollegeDB;
+USE CollegeDB;
+
+
+CREATE TABLE marks(
+  roll_no INT,
+  name VARCHAR(30),
+  total_marks INT
+);
+
+CREATE TABLE result(
+  roll_no INT,
+  name VARCHAR(30),
+  class VARCHAR(30)
+);
+
+
+INSERT INTO marks VALUES 
+(1,'Amit',1200),
+(2,'Priti',950),
+(3,'Rohan',860),
+(4,'Sneha',820),
+(5,'Patil',750),
+(6,'Komal',640);
+
+SELECT * FROM marks;
+
+
+DELIMITER //
+
+CREATE PROCEDURE proc_grade(IN marks INT, OUT grade VARCHAR(30))
+BEGIN
+  IF marks BETWEEN 990 AND 1500 THEN
+    SET grade = 'Distinction';
+  ELSEIF marks BETWEEN 900 AND 989 THEN
+    SET grade = 'First Class';
+  ELSEIF marks BETWEEN 825 AND 899 THEN
+    SET grade = 'Higher Second Class';
+  ELSEIF marks BETWEEN 750 AND 824 THEN
+    SET grade = 'Second Class';
+  ELSEIF marks BETWEEN 650 AND 749 THEN
+    SET grade = 'Pass';
+  ELSE
+    SET grade = 'Fail';
+  END IF;
+END;
+//
+DELIMITER ;
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+
+DELIMITER //
+
+CREATE FUNCTION final_result(r INT)
+RETURNS INT
+DETERMINISTIC     
+BEGIN
+  DECLARE fmarks INT;
+  DECLARE stud_name VARCHAR(30);
+  DECLARE grade VARCHAR(30);
+
+  SELECT total_marks, name INTO fmarks, stud_name 
+  FROM marks WHERE roll_no = r;
+
+  CALL proc_grade(fmarks, @grade);
+  INSERT INTO result VALUES (r, stud_name, @grade);
+
+  RETURN r;
+END;
+//
+DELIMITER ;
+
+
+SELECT final_result(1);
+SELECT final_result(2);
+SELECT final_result(3);
+SELECT final_result(4);
+SELECT final_result(5);
+SELECT final_result(6);
+
+
+SELECT * FROM result;
