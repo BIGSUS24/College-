@@ -1,0 +1,89 @@
+Experiment: Descriptive Statistics - Measures of Central Tendency and Variability
+
+Theory
+
+Descriptive statistics is used to summarize data in a way that is easy to understand. Instead of
+looking at every record one by one, the analyst calculates a few key numbers that describe the
+center, spread, and overall shape of the dataset. This is useful in almost every field because
+summary statistics reveal important information quickly. They help answer questions such as where
+the values are concentrated, how widely they vary, and whether some observations are unusually large
+or small.
+
+Measures of central tendency describe a typical value in the dataset. The mean is the arithmetic
+average and works well when the data is balanced. The median is the middle value after sorting the
+data and is better when the data contains outliers or skewness. The mode represents the most
+frequent value and is useful when repeated values matter. In practical analysis, comparing mean and
+median can also reveal whether the distribution is symmetric or skewed.
+
+Measures of dispersion explain how spread out the values are. A dataset can have the same mean as
+another dataset but still behave very differently if the spread is not the same. The range gives the
+simplest measure of spread, while variance and standard deviation give a more detailed picture.
+Standard deviation is especially useful because it is expressed in the same unit as the original
+data. Quartiles and the interquartile range are also important because they describe the middle
+portion of the data without being overly affected by extreme values.
+
+Grouped summary statistics are one of the most practical uses of descriptive statistics. When a
+numeric variable is grouped by a categorical variable, patterns become much easier to notice. For
+example, comparing income across age groups, marks across departments, or weight across gender
+groups helps reveal differences that are hidden in the raw dataset. In Pandas, this is usually done
+with groupby(), followed by aggregation functions such as mean, median, min, max, and standard
+deviation.
+
+The Iris dataset is a classic example for this assignment because it contains more than one class
+and several numerical features. Calculating percentiles and other statistics for each species gives
+a clear sense of how the flower types differ. The setosa species, for instance, has measurements
+that are often distinct from the other classes, which is one reason the dataset is popular in
+classification examples. Descriptive statistics helps show those differences before any model is
+built.
+
+Skewness is another useful concept in this experiment. A positive skew means the tail is longer on
+the right side, while a negative skew means the tail is longer on the left. When the distribution is
+symmetrical, the mean and median tend to be close. Looking at skewness helps decide whether
+transformation may be needed before modeling. A variable with heavy skewness may be difficult to
+interpret using only the mean, so median and quartiles become more valuable.
+
+A strong descriptive analysis gives a first view of the dataset and often reveals issues such as
+missing values, unrealistic ranges, or surprising clusters of observations. It is the foundation of
+exploratory data analysis and supports better decision-making later.
+
+Conclusion
+
+The experiment shows that statistical summaries are essential for understanding the data quickly. By
+using measures of center, spread, and grouped comparison, the analyst gets a clear view of how the
+dataset behaves. This prepares the data for more advanced analysis and modeling.
+
+Additional Discussion
+
+In real data analysis, the choice between mean and median depends on the shape of the data. If the
+distribution is fairly balanced, the mean gives a useful summary. If the data contains extreme
+values or is skewed, the median is usually safer. This is why descriptive statistics should never be
+treated as a mechanical output only. The analyst must read the numbers in the context of the
+distribution and ask what they actually say about the data.
+
+Percentiles and quartiles are especially useful in reports because they describe the spread without
+focusing only on the average. They show where most of the data lies and how far the extremes are
+from the center. In many business and academic scenarios, that is more informative than a single
+mean value. For example, knowing the 25th, 50th, and 75th percentile of marks tells more about
+student performance than the mean alone.
+
+The statistical summary also supports comparison across groups. If one group has a higher median but
+a much larger spread, the conclusion is different from a group that has a smaller median but is
+tightly clustered. Descriptive statistics therefore provides the language for comparing data in a
+fair and structured way. It is the starting point for making evidence-based interpretations.
+
+Final Notes
+
+Descriptive statistics is also important because it helps detect problems early. If the minimum or
+maximum looks impossible, the data may contain an error. If the mean and median are very far apart,
+the distribution may be skewed. These small clues are very useful because they tell the analyst
+where to look next. Statistics therefore acts as both summary and warning system.
+
+When a dataset is grouped by category, descriptive statistics becomes even more meaningful. It lets
+the analyst compare subgroups without building a full model. That is useful in reports, dashboards,
+and classroom work. A clean summary table can answer a question quickly and clearly, which is often
+more effective than a long explanation.
+
+The main strength of descriptive statistics is that it creates a shared language for data. Everyone
+can understand mean, median, quartiles, and deviation. This makes the results easier to communicate
+and easier to review. It is a simple but powerful starting point for all data analysis.
+

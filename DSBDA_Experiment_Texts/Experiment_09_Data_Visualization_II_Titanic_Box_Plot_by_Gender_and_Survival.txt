@@ -1,0 +1,86 @@
+Experiment: Data Visualization II - Titanic Box Plot by Gender and Survival
+
+Theory
+
+Box plots are compact visual tools that summarize the distribution of a numeric variable. They show
+the median, quartiles, spread, and potential outliers in one figure. Because of this, box plots are
+especially useful when comparing several groups side by side. In the Titanic experiment, age is
+plotted with respect to sex and survival status, which makes it possible to compare patterns across
+groups and examine how the distribution changes.
+
+The box portion of the plot represents the middle half of the data, from the first quartile to the
+third quartile. The line in the box is the median, which shows the center of the distribution. The
+whiskers extend to the lower and upper values within a reasonable range, and points outside that
+range may be treated as outliers. This structure gives the analyst a fast view of both center and
+spread.
+
+Age is a useful variable on the Titanic because survival patterns were often influenced by age and
+gender. By plotting age against sex, one can see whether male and female passengers had similar age
+distributions or whether one group was younger or older on average. Adding survival as a second
+comparison layer helps reveal whether survivors and non-survivors had different age patterns. Such
+comparisons are a basic but important part of exploratory analysis.
+
+Box plots are especially good for detecting differences that are not obvious in raw numbers. Two
+groups may have similar averages but very different spreads. One group might have a narrow box and
+short whiskers, while another may be widely spread with several outliers. This information is
+valuable because it tells the analyst about variability, not just central tendency. A plot can
+therefore show a deeper story than a single mean value.
+
+Observations from box plots are often written in simple language. For example, one can note whether
+the median age is higher in one group, whether the spread is larger in another, or whether the
+outliers suggest rare cases. These observations are useful because they translate visual evidence
+into interpretation. This is exactly what exploratory statistics is meant to do.
+
+The Titanic dataset is a strong teaching example because the patterns are meaningful and widely
+discussed. Students can use the plot to notice differences between sexes, understand survival
+distribution, and learn how to describe results from a chart. This builds confidence in statistical
+reading and communication.
+
+Box plots also support outlier analysis. In real data, outliers may reflect rare behavior or errors,
+and the analyst must think carefully before removing them. The plot helps identify those points
+early. That makes box plots a valuable tool in preprocessing as well as visualization.
+
+Overall, this assignment develops the ability to compare groups visually and to write observations
+based on actual data patterns. That skill is essential in data analysis because numbers alone are
+less effective than a clear visual summary.
+
+Conclusion
+
+The experiment shows how box plots reveal the distribution of age across gender and survival groups
+in the Titanic dataset. The chart makes it easy to see the center, spread, and outliers of each
+group. This is a useful example of statistical comparison through visualization.
+
+Additional Discussion
+
+Box plots are especially effective because they remain readable even when several groups are
+compared. Unlike a long table of summary statistics, one figure can show the central value, spread,
+and unusual points for each category. This makes box plots valuable in reports, classroom
+assignments, and exploratory data analysis. They are compact but rich in information.
+
+When reading a box plot, the analyst should pay attention to overlap between groups as well as
+differences in median and spread. Large overlap suggests that the groups may not be very different,
+while clearly separated boxes may indicate meaningful differences. However, the plot should not be
+overinterpreted on its own. It is a visual summary, not a final statistical proof. Still, it gives a
+strong first impression of the data.
+
+For the Titanic dataset, the gender and survival comparison is useful because it reflects well-known
+patterns in the passenger data. The plot helps students practice reading those patterns carefully
+and turning them into written observations. That skill is important because data analysis is only
+complete when the findings can be explained clearly to others.
+
+Final Notes
+
+Box plots are useful in reports because they keep the focus on the important parts of the
+distribution. The median shows the center, the box shows the middle spread, and the whiskers show
+variability. This makes them excellent for comparison across categories. They are simple, but they
+communicate a lot of statistical information very efficiently.
+
+In the Titanic dataset, the age-by-gender and survival comparison can reveal whether certain groups
+had different age structures. Even when the result is not dramatic, the plot still gives a
+disciplined way to inspect the data. That discipline matters because visual impressions should be
+based on actual summaries, not guesses.
+
+The main lesson is that interpretation must be careful and grounded in the chart itself. A box plot
+does not prove a cause, but it gives strong evidence of differences worth studying. That is exactly
+why box plots are part of exploratory analysis.
+

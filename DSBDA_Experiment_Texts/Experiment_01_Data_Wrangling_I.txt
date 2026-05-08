@@ -1,0 +1,103 @@
+Experiment: Data Wrangling I
+
+Theory
+
+Data wrangling is the process of converting raw, messy, or inconsistent data into a usable form. In
+practice, data rarely arrives in a perfect condition. Values may be missing, records may be
+duplicated, formats may not match, and category labels may be written in different ways. Because of
+this, the raw dataset is not ready for direct analysis. The purpose of data wrangling is to reduce
+uncertainty in the data and prepare a clean foundation for statistics, visualization, and machine
+learning.
+
+The first stage is understanding the dataset itself. A data analyst must identify where the data
+came from, what each column means, how many rows and columns exist, and what type of information is
+stored in each variable. Data frames in Pandas make this inspection easier because they allow the
+user to examine shape, sample rows, summary statistics, and data types. A quick look at the first
+few and last few records often reveals obvious problems such as missing cells, repeated values, or
+strange formatting.
+
+Missing values are one of the most common problems in real datasets. They may appear because the
+information was never collected, the survey respondent skipped the question, the sensor failed, or
+the record was damaged during transfer. Some datasets use blanks, question marks, dashes, or special
+strings instead of true null values. These placeholders must be converted into a standard missing-
+value format before any cleaning method can be applied. Once the missing values are identified, the
+analyst can decide whether to delete them or fill them using a meaningful substitute.
+
+Handling missing data is not a one-size-fits-all decision. If only a tiny portion of rows is missing
+and the columns are not critical, dropping those rows may be acceptable. But when the dataset is
+small or the missing values are concentrated in important columns, imputation is more useful. Mean
+or median imputation is common for numeric columns, while mode imputation is often used for
+categorical data. In more advanced workflows, missing values may be predicted using regression or
+nearest-neighbor methods, but basic assignments usually focus on simple and explainable techniques.
+
+Data formatting is another important part of wrangling. Many algorithms require numeric data, so
+text labels and categories must be converted into a usable representation. Categorical columns may
+be encoded with one-hot encoding or label encoding depending on the situation. In addition, numeric
+values may be stored as strings because of data entry issues, which means they must be explicitly
+cast into numeric types. Correct formatting prevents errors during analysis and ensures that
+mathematical operations behave as expected.
+
+Normalization and scaling are often used after cleaning and formatting. These techniques make sure
+that features are on comparable scales. For example, if one variable ranges from 0 to 1 and another
+ranges from 0 to 10,000, the larger values may dominate some models. Normalization can map values to
+a fixed interval such as 0 to 1, while standardization centers data around zero with unit variance.
+These transformations are useful when the model depends on distances, gradients, or feature
+magnitudes.
+
+The practical value of data wrangling is very high because the quality of the final analysis depends
+on the quality of the input. Clean data improves the accuracy of plots, summary statistics, and
+prediction models. It also makes results easier to trust because the analyst can explain how the
+data was cleaned and why each decision was made. In short, wrangling is not a separate side task; it
+is a core part of analysis itself.
+
+In a teaching environment, this experiment is important because it connects raw data handling with
+later machine learning tasks. Students learn that before building a model they must inspect the
+dataset, locate errors, correct types, handle missing values, and convert categories into numbers.
+This helps create a disciplined workflow that can be reused in future projects.
+
+Conclusion
+
+The experiment shows that useful analysis begins with proper preparation of the dataset. By
+identifying missing values, correcting data types, and converting categories into numeric form, the
+dataset becomes reliable and ready for further processing. This makes data wrangling a necessary
+first step in every data science workflow.
+
+Additional Discussion
+
+In practice, the order of wrangling steps matters. Analysts usually inspect the data first, then fix
+data types, then treat missing values, and finally encode or normalize variables. If these steps are
+done in the wrong order, the result may be misleading. For example, encoding categories before
+cleaning labels can produce duplicate dummy variables. Likewise, imputing missing values before
+understanding the data may hide a deeper structural issue in the dataset. A good workflow avoids
+guesswork and makes each transformation easy to justify.
+
+Another reason wrangling is important is that it improves reproducibility. When the cleaning steps
+are written clearly, another person can repeat the same process and obtain the same cleaned dataset.
+This is especially important in academic work and team projects. Reproducible wrangling also makes
+debugging easier, because if something goes wrong the analyst can trace which step introduced the
+issue. Clean preprocessing is therefore part of good scientific practice, not just a technical
+convenience.
+
+In addition, preprocessing helps when different datasets must be combined. Real projects often
+require joining information from multiple sources. If the keys are inconsistent, dates are formatted
+differently, or categories use different spellings, the join will fail or produce incorrect matches.
+Wrangling standardizes the data so that different tables can be merged safely. This is one of the
+main reasons why preprocessing is considered the backbone of data engineering and analytics.
+
+Final Notes
+
+From an academic point of view, data wrangling is valuable because it teaches discipline before
+modeling begins. Many beginners want to jump directly into graphs or algorithms, but the quality of
+those outputs depends on the quality of the raw data. A careful wrangling step prevents weak
+assumptions and makes the final analysis easier to defend. This is especially important when the
+dataset is shared or reused by other people.
+
+The cleaned dataset can later support descriptive statistics, regression, or classification without
+repeated manual fixes. This saves time and makes the workflow more efficient. It also reduces the
+chance of inconsistent corrections being made in different parts of the analysis. Once the dataset
+has a standard format, every later task becomes easier to carry out and easier to explain.
+
+Overall, the strongest lesson from this experiment is that preparation is not a side task. It is the
+main gatekeeper of quality. If the data is not clean, every later step becomes uncertain. If the
+data is clean, analysis becomes smoother, faster, and more reliable.
+

@@ -1,0 +1,93 @@
+Experiment: Logistic Regression and Confusion Matrix
+
+Theory
+
+Logistic regression is one of the most commonly used classification algorithms in data science. It
+is designed for situations where the target variable is categorical, especially binary. The model
+estimates the probability that a data point belongs to a class and then uses that probability to
+make a decision. Even though it has the word regression in its name, it is primarily a
+classification method.
+
+The sigmoid function is central to logistic regression. It transforms a real-valued score into a
+value between 0 and 1, which can be interpreted as probability. This transformation is important
+because probabilities must stay within a fixed range. The model first forms a linear combination of
+the inputs, and then the sigmoid maps that value to a probability estimate. A threshold, often 0.5,
+is then used to decide the final class label.
+
+Compared with linear regression, logistic regression is better suited to classification because it
+produces bounded output. Linear regression can generate values less than 0 or greater than 1, which
+is not appropriate for probabilities. Logistic regression solves this by applying a nonlinear
+activation. This is why it is widely used in domains where the answer is yes/no, true/false, or
+class A/class B.
+
+The evaluation of logistic regression depends heavily on the confusion matrix. The matrix counts
+true positives, true negatives, false positives, and false negatives. These values are more
+informative than accuracy alone because they show what kinds of mistakes the classifier makes. A
+model can have decent accuracy but still perform poorly on the class that matters most. Precision
+and recall help reveal this. Precision measures the correctness of predicted positives, while recall
+measures how many actual positives are found.
+
+The Social_Network_Ads dataset is suitable for this model because it contains a binary outcome and
+features that can be used to predict purchase behavior. Before fitting the model, preprocessing is
+usually required. Categorical data may need encoding, numerical features may need scaling, and the
+dataset must be divided into training and testing sets. These steps help the model learn better and
+allow fair evaluation.
+
+A logistic model is easy to explain and fast to train, which makes it a strong baseline for many
+classification problems. It is often the first model used before moving to more complex techniques
+such as decision trees, random forests, or neural networks. Its interpretability is especially
+useful when the goal is not only to predict but also to understand which features affect the result.
+
+The confusion matrix also supports practical decision-making. In some problems false positives are
+more costly, while in others false negatives are more dangerous. For example, in medical screening,
+missing a positive case can be serious, so recall becomes very important. In advertisement
+prediction, precision may matter more if false clicks are expensive. Logistic regression therefore
+teaches both classification and the meaning of evaluation metrics.
+
+This makes the experiment valuable not only for learning an algorithm but also for learning how to
+judge classification results responsibly. A model should not be called good just because it produces
+a number; the class-level errors must also be understood.
+
+Conclusion
+
+The experiment shows how logistic regression turns numeric features into class predictions and how
+the confusion matrix measures success and failure. Accuracy, precision, and recall together give a
+complete picture of the model's quality. This makes the method highly useful for binary
+classification tasks.
+
+Additional Discussion
+
+The threshold in logistic regression is another practical detail worth noting. A default threshold
+of 0.5 is common, but it is not mandatory. In some applications the threshold is adjusted to reduce
+false positives or false negatives depending on the cost of mistakes. This means the same trained
+model can be used differently depending on the business or research objective. The threshold choice
+is therefore part of decision-making, not just model fitting.
+
+Feature scaling often improves logistic regression because the optimization process becomes more
+stable when variables are on similar ranges. Without scaling, features with large numeric values may
+dominate the learning process even if they are not the most important predictors. Scaling does not
+change the meaning of the data, but it helps the algorithm learn more efficiently and sometimes more
+accurately.
+
+The confusion matrix is useful because it goes beyond a single summary score. It tells the story of
+the model's mistakes. Some models are good at finding positives but also create many false alarms.
+Others are conservative and miss too many positives. By reading the matrix, the analyst can judge
+which error type is more acceptable. That is why evaluation should always match the purpose of the
+task.
+
+Final Notes
+
+One important lesson from logistic regression is that prediction and decision are not the same
+thing. The model outputs probability, but the final class depends on a threshold. That means the
+decision rule can be changed even when the underlying model stays the same. This is very useful in
+practice because different problems have different tolerances for mistakes.
+
+Another lesson is that accuracy alone is rarely enough. A model may appear good overall but still
+fail on the class that matters most. Precision and recall show the trade-off more clearly. This is
+why the confusion matrix is such an important tool. It makes the classifier's behavior visible
+instead of hiding it in a single percentage.
+
+The experiment therefore builds both technical skill and judgment. It shows how to train a
+classifier and how to evaluate it properly. Those are two separate skills, and both are required for
+responsible machine learning work.
+

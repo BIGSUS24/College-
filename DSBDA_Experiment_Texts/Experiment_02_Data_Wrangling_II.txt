@@ -1,0 +1,100 @@
+Experiment: Data Wrangling II
+
+Theory
+
+Data wrangling II extends the basic cleaning workflow by focusing on missing data, outliers, and
+transformation of the academic performance dataset. Student datasets are especially useful because
+they often contain a mix of numeric and categorical features such as marks, dates, attendance, and
+placement counts. They also tend to contain realistic imperfections, which makes them ideal for
+demonstrating why preprocessing matters before any statistical conclusion is drawn.
+
+The first issue is missing and inconsistent values. A missing value may not always mean a completely
+blank cell. Sometimes it is hidden in the form of an invalid string, a zero used as a placeholder,
+or a value outside the logical range of the column. For instance, a date written in the wrong year
+or a score greater than the maximum possible score is inconsistent even if it is not technically
+null. The analyst must scan the dataset carefully and decide whether the issue should be corrected,
+replaced, or removed.
+
+After the missing values are addressed, the next task is detecting outliers. Outliers are
+observations that sit far away from the main cluster of data. In an academic dataset, they may
+appear as unusually high marks, extremely low attendance, or strange placement counts. Some outliers
+are genuine and represent exceptional students, while others are errors introduced during data
+entry. Because outliers can distort mean values and statistical measures, they must be handled with
+care.
+
+There are several standard ways to detect outliers. Box plots provide a visual summary of quartiles
+and make extreme values easy to notice. Scatter plots can reveal points that break away from a
+pattern. Z-scores measure how far each point is from the mean in standard deviation units, and the
+interquartile range method identifies values outside a robust lower and upper bound. Among these,
+the IQR method is especially popular because it works well even when the data is not perfectly
+normal.
+
+Once outliers are identified, the analyst must choose a treatment. Removing them completely is
+simple but can reduce the amount of useful information in the dataset. Capping or flooring values
+keeps the record but limits the influence of extremes. Median replacement is another common approach
+because the median is less sensitive to unusual values. The correct method depends on whether the
+outlier is a data error or a true but rare observation.
+
+Data transformation is used when the shape or scale of a variable makes analysis difficult. For
+example, a column that is heavily right-skewed can be transformed using a log or square-root
+function to make its distribution more balanced. Transformation can also bring variables to a
+similar scale so that comparisons become easier. This is useful when one variable has very small
+values and another has very large values. The main goal is to make the data easier to interpret and
+more suitable for statistical analysis.
+
+The academic performance dataset is a good example of how preprocessing affects later results. If
+missing values remain, the analysis may become incomplete. If outliers remain untreated, averages
+and models may become misleading. If transformation is not applied where needed, the variable may
+remain too skewed for good interpretation. Therefore, the experiment demonstrates how cleaning,
+outlier handling, and transformation work together as a single preparation pipeline.
+
+This assignment also helps students understand that preprocessing decisions are not random. Each
+action must have a reason. Dropping, replacing, or transforming data should always be chosen based
+on the structure of the dataset and the objective of the analysis. This careful reasoning is what
+separates proper data work from casual editing.
+
+Conclusion
+
+The experiment shows that academic data must be cleaned systematically before it can be trusted. By
+handling missing values, detecting outliers, and applying transformations, the dataset becomes more
+stable and meaningful. This prepares it for statistical analysis and improves the quality of every
+later result.
+
+Additional Discussion
+
+A careful analyst also checks whether the outliers are truly wrong or simply uncommon. For example,
+a very high placement score may be unusual but still valid if the student performed exceptionally
+well. Removing such a point blindly could damage the analysis. That is why visual inspection and
+domain knowledge matter. The data cleaning process should support the story told by the data rather
+than destroy meaningful exceptions.
+
+Transformation is often underestimated, but it can change the usability of a variable completely. A
+heavily skewed column may produce unstable averages and make comparisons difficult. After a log
+transformation, the values may become easier to compare and the distribution may become more
+symmetric. This helps many statistical methods work better because they assume roughly balanced or
+normal-looking input. Transformation is therefore not only cosmetic; it often improves the
+mathematical behavior of the data.
+
+In educational datasets, the cleaned values can later be used to study performance trends, predict
+placement outcomes, or compare different batches of students. That makes the dataset more than a
+classroom example. It becomes a model for real analysis where decisions may depend on accurate and
+fair interpretation of student records. Good preprocessing ensures that those decisions are based on
+solid data rather than accidental noise.
+
+Final Notes
+
+In practice, outlier handling is often the point where judgment matters most. A value that looks
+strange may still be correct, and removing it without checking can weaken the analysis. This is why
+the analyst should always compare visual evidence with the meaning of the column. The goal is not to
+force all values into a narrow pattern, but to keep the data honest and usable.
+
+Transformation is useful because many methods behave better when variables are closer to a normal
+shape or a comparable scale. A log transformation can compress very large values and reveal
+structure that was hidden before. A standardized or normalized variable can also improve comparison
+across features. These adjustments are simple, but they often improve the quality of the final
+interpretation.
+
+This experiment is therefore a complete example of preprocessing. It shows how cleaning, detection,
+and transformation are linked. Each step supports the next one, and together they make the dataset
+more trustworthy for later analysis.
+

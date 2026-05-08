@@ -1,0 +1,94 @@
+Experiment: Linear Regression Using Boston Housing Dataset
+
+Theory
+
+Linear regression is a supervised learning method used to predict a numeric target from one or more
+explanatory variables. It is one of the simplest and most important predictive techniques because it
+helps explain how one variable changes when others change. In the Boston Housing problem, the target
+is the house price and the features describe neighborhood and property characteristics. The goal is
+to learn how those characteristics influence the final price.
+
+The simplest version of the model is univariate regression, where one predictor is used. The more
+realistic version is multivariate regression, where several predictors are included together. In
+both cases, the model learns coefficients that represent the contribution of each feature. A
+positive coefficient means the target increases when the feature increases, while a negative
+coefficient means the target tends to decrease. The intercept represents the predicted value when
+the features are zero, even if that case is only theoretical.
+
+The least squares method is used to fit the line or plane. This method computes the distance between
+actual values and predicted values, squares those distances, and adds them up. The best model is the
+one with the smallest total squared error. Squaring is useful because it removes negative signs and
+gives larger errors more influence. That is why the model focuses on fitting the majority of the
+data points as closely as possible.
+
+Linear regression is easy to interpret, which is one of its biggest strengths. Unlike black-box
+algorithms, the output coefficients can be explained in words. This is very useful in housing
+analysis because a stakeholder may want to know whether room count, accessibility, or crime rate has
+a stronger relationship with price. At the same time, the assumptions of linear regression must be
+respected. The relationship should be approximately linear, and the error structure should not be
+severely distorted if the model is to work well.
+
+The model is evaluated using metrics such as MSE, RMSE, and R-squared. MSE gives the average squared
+error, RMSE gives the error in the original unit, and R-squared explains how much of the variance is
+captured by the model. These values allow the analyst to compare models and decide whether the
+current fit is acceptable. A model with low error and high R-squared is usually better, but the
+quality should also be judged in relation to the problem and the data.
+
+The Boston Housing dataset is widely used because it is suitable for teaching the full regression
+workflow. Students can practice loading the dataset, splitting it into training and testing sets,
+fitting a model, making predictions, and checking the performance. Even though the dataset is older
+and small, it remains useful for learning because it contains many features and shows the difference
+between an intuitive model and a measured model.
+
+Linear regression is also a gateway to more advanced techniques. Once the learner understands
+regression, it becomes easier to study polynomial regression, regularization, generalized linear
+models, and other predictive methods. The basic logic of prediction, coefficient interpretation, and
+error minimization remains useful across many later algorithms.
+
+In real applications, regression results must be read carefully. A good-looking line does not
+automatically mean a good model. The analyst must also consider whether the features are enough,
+whether important variables are missing, and whether the relationship is actually linear. This
+balanced view is part of proper model analysis.
+
+Conclusion
+
+The experiment demonstrates how a numeric prediction model is built and evaluated. Linear regression
+provides an interpretable way to estimate house prices from housing features, and the performance
+metrics show how reliable the predictions are. This makes the method a strong starting point for
+supervised learning.
+
+Additional Discussion
+
+A good regression model is not judged only by fitting the training data. It must also perform well
+on unseen data. That is why splitting the dataset into training and testing sets is an essential
+step. The training set is used to estimate the coefficients, while the testing set is used to check
+whether the learned relationship generalizes. If the model performs much better on training data
+than on test data, it may be overfitting and should be reviewed carefully.
+
+Regression also requires reasonable assumptions. The relation between features and target should be
+approximately linear for a simple linear model, and the residuals should not show strong patterns.
+If these assumptions are violated, the model may still produce numbers, but those numbers may not be
+trustworthy. In such cases, other models or feature transformations may be more suitable. This is
+one reason why regression is often the first, not the final, model in a project.
+
+In the Boston Housing dataset, the regression coefficients also help explain which variables move
+price upward or downward. This interpretability is valuable in teaching because it links mathematics
+with real-world meaning. Students can see that prediction is not just about accuracy, but also about
+understanding relationships in the data.
+
+Final Notes
+
+The Boston Housing example also shows that regression should be interpreted in context. A
+coefficient does not just represent a number; it represents a relationship between a feature and the
+target. Some features may have a positive impact on price, while others may have a negative one.
+Understanding those signs is important because it turns mathematics into practical meaning.
+
+Model evaluation matters because prediction errors are unavoidable. The question is not whether the
+model has error, but whether the error is acceptable. MSE and RMSE measure how far predictions are
+from reality, while R-squared shows the proportion of variation explained by the model. These
+numbers help the analyst decide whether the model is strong enough for the task.
+
+This experiment is useful because it teaches the full regression loop: prepare data, split it, fit a
+model, predict, and evaluate. That loop appears in many machine learning projects. Once a student
+understands it well, more complex models become much easier to learn.
+

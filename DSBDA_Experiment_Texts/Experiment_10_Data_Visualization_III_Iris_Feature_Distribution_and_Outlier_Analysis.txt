@@ -1,0 +1,88 @@
+Experiment: Data Visualization III - Iris Feature Distribution and Outlier Analysis
+
+Theory
+
+The Iris dataset is a classic dataset used to teach data analysis, statistics, and machine learning.
+It contains four numeric measurements of flowers and one categorical label indicating species.
+Because the features are simple and the classes are well known, the dataset is excellent for
+learning how to inspect feature types, study distributions, and identify unusual values. It is often
+one of the first datasets used in exploratory data analysis.
+
+The first step is to identify the features and their types. Sepal length, sepal width, petal length,
+and petal width are numeric features. The species column is nominal, meaning it represents
+categories without natural order. Knowing the type of each feature matters because different
+features require different kinds of analysis. Numeric features can be visualized with histograms and
+box plots, while categorical features are usually counted or compared across classes.
+
+Histograms are useful because they show how values are spread across intervals. They help reveal
+whether a feature is symmetric, skewed, narrow, or broad. In the Iris dataset, some features may
+show clear separation between species, while others overlap more. This is important because the
+overlap or separation between distributions gives clues about how hard the classification problem
+may be. A well-separated feature is more useful for prediction than one where all species look
+similar.
+
+Box plots complement histograms by showing median, quartiles, and possible outliers. While a
+histogram focuses on shape, a box plot focuses on spread and extreme values. Using both together
+gives a more complete understanding of the data. For example, a feature may have a mostly
+concentrated distribution but still contain a few outlier points. Those points may be important to
+inspect because they can affect summary statistics and model behavior.
+
+Identifying outliers is an important practical skill. Outliers may represent rare biological
+variation, but they can also come from measurement error or data corruption. The analyst should not
+automatically delete them. Instead, the values should be examined in context and compared with the
+rest of the dataset. If the value seems plausible, it may be kept. If it is clearly wrong, cleaning
+may be necessary. This careful approach is part of good data practice.
+
+This experiment is also valuable because it links visualization with preprocessing. Before building
+a classifier, the analyst should understand the spread of each feature and the relation between
+species. Histograms and box plots make that possible. They also provide a quick check of whether the
+dataset is balanced and whether any feature appears unusual or suspicious.
+
+The Iris dataset is small, but it teaches important habits. It trains the analyst to look at each
+variable separately, compare categories, and think about data quality before modeling. These habits
+scale to larger projects where the same ideas apply to much more complex data.
+
+In real analysis, this kind of inspection prevents mistakes. A model built on poorly understood data
+may appear to work but fail when used on new cases. That is why scanning the dataset visually is a
+critical first step.
+
+Conclusion
+
+The experiment demonstrates how the Iris dataset can be analyzed through feature typing, histograms,
+box plots, and outlier detection. These simple tools provide a clear summary of the data and prepare
+it for further statistical or machine learning work.
+
+Additional Discussion
+
+Histograms and box plots are complementary. A histogram shows the shape of the distribution, while a
+box plot shows the center and spread in a compact way. Using both together gives a much better
+understanding of each feature than using either one alone. This is why many exploratory data
+analysis workflows include both plots for every major numeric variable.
+
+Outlier detection is not simply about removing values. It is about understanding whether those
+values are a problem or a signal. In the Iris dataset, extreme values may still be valid because
+different species naturally vary. The analyst should therefore be careful and avoid deleting rare
+but real observations. Good preprocessing preserves useful information while removing clear
+mistakes.
+
+By studying feature distributions, students also gain intuition about class separation. Some Iris
+features separate species very clearly, while others overlap more. This helps explain why certain
+measurements are more informative than others. Understanding that difference is useful later when
+building classification models or comparing feature importance.
+
+Final Notes
+
+Feature distribution analysis is important because machine learning models depend on the quality and
+structure of the input variables. Some features are highly informative, while others may overlap
+heavily between classes. Looking at histograms and box plots helps identify which variables are
+likely to be useful and which ones may need more attention before modeling.
+
+Outliers also matter because they can affect averages, spread, and model behavior. In a small
+dataset like Iris, even a few extreme values can change the overall picture. That is why the analyst
+should inspect them carefully rather than delete them automatically. Sound judgment is more
+important than mechanical cleaning.
+
+This experiment gives a clean introduction to visual data inspection. It teaches the student how to
+examine each feature individually, compare its spread, and think about what the values mean. That
+habit becomes very valuable in larger and more complex datasets.
+

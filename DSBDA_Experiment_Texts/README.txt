@@ -1,0 +1,15 @@
+DSBDA Experiment Text Files
+
+These files were generated from the uploaded practical assignment PDF and expanded into theory + conclusion writeups for each experiment.
+
+Files:
+- Experiment_01_Data_Wrangling_I.txt
+- Experiment_02_Data_Wrangling_II.txt
+- Experiment_03_Descriptive_Statistics_Measures_of_Central_Tendency_and_Variability.txt
+- Experiment_04_Linear_Regression_Using_Boston_Housing_Dataset.txt
+- Experiment_05_Logistic_Regression_and_Confusion_Matrix.txt
+- Experiment_06_Simple_Naive_Bayes_Classification.txt
+- Experiment_07_Text_Analytics_Using_Tokenization_POS_Tagging_Stemming_Lemmatization_and_TF_IDF.txt
+- Experiment_08_Data_Visualization_I_Titanic_Histogram_and_Pattern_Analysis.txt
+- Experiment_09_Data_Visualization_II_Titanic_Box_Plot_by_Gender_and_Survival.txt
+- Experiment_10_Data_Visualization_III_Iris_Feature_Distribution_and_Outlier_Analysis.txt
