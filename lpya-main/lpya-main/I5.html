@@ -1,0 +1,41 @@
+<!-- Experiment No. 5 -->
+<!-- Diffie-Hellman Key Exchange -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diffie-Hellman</title>
+</head>
+<body>
+
+<h2>Diffie-Hellman Key Exchange</h2>
+
+<script>
+
+let P = parseInt(prompt("Enter Prime Number (P):"));
+let G = parseInt(prompt("Enter Primitive Root (G):"));
+
+let a = parseInt(prompt("Enter Alice Private Key:"));
+let b = parseInt(prompt("Enter Bob Private Key:"));
+
+// Public Keys
+let x = (G ** a) % P;
+let y = (G ** b) % P;
+
+// Secret Keys
+let ka = (y ** a) % P;
+let kb = (x ** b) % P;
+
+document.write("Prime Number (P): " + P + "<br>");
+document.write("Primitive Root (G): " + G + "<br><br>");
+
+document.write("Alice Public Key: " + x + "<br>");
+document.write("Bob Public Key: " + y + "<br><br>");
+
+document.write("Alice Secret Key: " + ka + "<br>");
+document.write("Bob Secret Key: " + kb + "<br>");
+
+</script>
+
+</body>
+</html>
